@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="TETRA: AI Powered Product Design — toepassing van generatieve en agentic AI in de verschillende fasen van productontwikkeling." />
+  <title>TETRA: AI Powered Product Design</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Naar inhoud</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="brand-text">
+          <div class="brand-top">Universiteit Antwerpen</div>
+          <div class="brand-bottom">Departement Productontwikkeling</div>
+        </div>
+      </div>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Hoofdnavigatie">
+        <a href="#overzicht">Overzicht</a>
+        <a href="#doelstellingen">Doelstellingen</a>
+        <a href="#npd">AI per fase</a>
+        <a href="#deelnemen">Deelnemen</a>
+        <a href="#focus">Inhoudelijke focus</a>
+        <a href="#mapping">Tool mapping</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">TETRA-project</p>
+          <h1 id="hero-title">AI Powered Product Design</h1>
+          <p class="lead">
+            Toepassing van generatieve en agentic AI in de verschillende fasen van het productontwikkelingsproces — met aandacht
+            voor meerwaarde, grenzen, en mens–AI samenwerking.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#deelnemen">Deelnemen als bedrijf</a>
+            <a class="btn ghost" href="https://clip-matte-97768634.figma.site" target="_blank" rel="noreferrer">
+              Link naar overzicht (Figma-site)
+            </a>
+          </div>
+
+          <div class="hero-facts" role="list">
+            <div class="fact" role="listitem">
+              <div class="fact-label">Doelgroep</div>
+              <div class="fact-value">Vlaamse kmo’s in product- & servicedesign, R&amp;D en innovatie</div>
+            </div>
+            <div class="fact" role="listitem">
+              <div class="fact-label">Looptijd (indicatief)</div>
+              <div class="fact-value">01/10/2026 – 30/09/2028</div>
+            </div>
+            <div class="fact" role="listitem">
+              <div class="fact-label">Formaat</div>
+              <div class="fact-value">Use-cases, workshops, kennisdeling</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel" aria-label="Schematische weergave van het NPD-proces">
+          <div class="panel-card">
+            <div class="panel-title">NPD-proces (schematisch)</div>
+            <svg class="npd-svg" viewBox="0 0 640 360" role="img" aria-label="Schematisch proces: ontdekken, concept, ontwerp, validatie, lancering">
+              <defs>
+                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="10" stdDeviation="14" flood-opacity="0.30"/>
+                </filter>
+              </defs>
+
+              <rect x="36" y="70" rx="18" ry="18" width="568" height="220" class="npd-shell" filter="url(#softShadow)"></rect>
+
+              <g class="npd-node">
+                <circle cx="130" cy="180" r="38"></circle>
+                <text x="130" y="168" text-anchor="middle">Ontdekken</text>
+                <text x="130" y="194" text-anchor="middle">&amp; definiëren</text>
+              </g>
+
+              <g class="npd-node">
+                <circle cx="255" cy="180" r="38"></circle>
+                <text x="255" y="168" text-anchor="middle">Idee</text>
+                <text x="255" y="194" text-anchor="middle">&amp; concept</text>
+              </g>
+
+              <g class="npd-node">
+                <circle cx="380" cy="180" r="38"></circle>
+                <text x="380" y="168" text-anchor="middle">Ontwerp</text>
+                <text x="380" y="194" text-anchor="middle">&amp; prototype</text>
+              </g>
+
+              <g class="npd-node">
+                <circle cx="505" cy="180" r="38"></circle>
+                <text x="505" y="168" text-anchor="middle">Testen</text>
+                <text x="505" y="194" text-anchor="middle">&amp; valideren</text>
+              </g>
+
+              <path d="M170 180 L215 180" class="npd-arrow"></path>
+              <path d="M295 180 L340 180" class="npd-arrow"></path>
+              <path d="M420 180 L465 180" class="npd-arrow"></path>
+              <path d="M540 180 C 585 180, 585 270, 505 285" class="npd-loop"></path>
+              <path d="M505 285 C 320 320, 180 310, 110 250" class="npd-loop"></path>
+              <path d="M110 250 C 40 200, 55 125, 92 105" class="npd-loop"></path>
+
+              <g class="npd-caption">
+                <text x="320" y="325" text-anchor="middle">Iteratief: mens–AI co-creatieve workflows</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="overzicht" aria-labelledby="overzicht-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="overzicht-title">Projectoverzicht</h2>
+          <p class="section-subtitle">
+            Dit project brengt AI-tools en AI-workflows in kaart overheen het New Product Development (NPD)-proces,
+            met expliciete aandacht voor ROI, beperkingen, en veilige integratie (governance, data, IP).
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Waarom dit project?</h3>
+            <ul class="bullets">
+              <li>Welke AI-systemen en technologieën bestaan er vandaag (ML, Deep Learning, NLP, LLM, RAG, Gen AI, Agentic AI)?</li>
+              <li>Waar en hoe zijn ze inzetbaar in productontwikkeling, en met welk doel?</li>
+              <li>Waar levert AI vandaag effectief meerwaarde (ROI), en waar is het nog (te) beperkt?</li>
+              <li>Hoe ga je veilig om met bedrijfsdata en intellectuele eigendom bij online AI-platformen?</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Wat levert dit op?</h3>
+            <p>
+              Een praktische categorisatie en mapping van AI-tools op de verschillende procesfases, ondersteund door
+              demo’s, workflows en praktijkcases bij deelnemende bedrijven.
+            </p>
+            <div class="callout">
+              <div class="callout-title">Tip</div>
+              <p class="callout-text">
+                Integreer ook een link naar het interactieve overzicht (Figma-site) in uw eigen interne communicatie of projectomgeving.
+              </p>
+              <a class="btn small" href="https://clip-matte-97768634.figma.site" target="_blank" rel="noreferrer">Open Figma-site</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="doelstellingen" aria-labelledby="doelstellingen-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="doelstellingen-title">Doelstellingen</h2>
+          <p class="section-subtitle">Vijf centrale doelstellingen die technologie, praktijk en governance verbinden.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3>1) Technologietransfer</h3>
+            <p>Vertalen en mappen van generatieve en agentic AI-tools naar concrete toepassingen in de NPD-fases.</p>
+          </article>
+          <article class="card">
+            <h3>2) Praktische use-cases</h3>
+            <p>Testen van veelbelovende toepassingen in reële ontwerp- en R&amp;D-omgevingen, met tastbare workflows en demo’s.</p>
+          </article>
+          <article class="card">
+            <h3>3) Kritische reflectie</h3>
+            <p>Do’s &amp; Don’ts: waarde versus kost, beperkingen, en risico’s rond data-deling, privacy en IP.</p>
+          </article>
+          <article class="card">
+            <h3>4) Mens–AI samenwerking</h3>
+            <p>Co-creatieve rolverdeling en procesmapping: taken, rollen en “ontwerper in control”.</p>
+          </article>
+          <article class="card">
+            <h3>5) Koppeling met DMS/PLM</h3>
+            <p>Workflows die aansluiten op DMS/PLM (versiebeheer, design reviews, traceerbaarheid) en hergebruik in DPP-context.</p>
+          </article>
+          <article class="card subtle">
+            <h3>Output</h3>
+            <p>Overzicht, evaluatie, stappenplan en lerend netwerk voor kmo’s.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="npd" aria-labelledby="npd-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="npd-title">AI in de verschillende fasen van productontwikkeling</h2>
+          <p class="section-subtitle">
+            Voorbeelden van AI-toepassingen en typische tools/technologieën per NPD-fase (2025, verder aan te vullen).
+          </p>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="Tabel: AI per NPD-fase">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fase in NPD-proces</th>
+                <th>Voorbeelden van AI-toepassingen</th>
+                <th>Typische tools / technologieën</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Ontdekken &amp; definiëren</strong></td>
+                <td>Automatische analyse van trends, marktonderzoek, clusteren van klantinzichten.</td>
+                <td>ChatGPT, Perplexity, Dovetail AI</td>
+              </tr>
+              <tr>
+                <td><strong>Idee-generatie &amp; conceptontwikkeling</strong></td>
+                <td>Snel creëren van conceptschetsen, vormvarianten en user flows.</td>
+                <td>Vizcom, Leonardo AI, Miro AI + Uizard</td>
+              </tr>
+              <tr>
+                <td><strong>Ontwerp &amp; prototyping</strong></td>
+                <td>Generatief/parametrisch ontwerp, AI-optimalisatie, “Model-as-a-Service”.</td>
+                <td>Rhino/Grasshopper, nTopology, Fusion 360 AI</td>
+              </tr>
+              <tr>
+                <td><strong>Testen &amp; valideren</strong></td>
+                <td>Analyse van gebruikerstesten, iteratieve verbeterloops.</td>
+                <td>Maze AI, Figma AI, SimScale</td>
+              </tr>
+              <tr>
+                <td><strong>Industrialiseren &amp; lanceren</strong></td>
+                <td>Documentatie, PLM-integratie, voorbereiding op digitale productpaspoorten (ESPR).</td>
+                <td>Copilot, Notion AI, PLM-AI-integraties (bv. Siemens, 3DS)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">
+          <strong>Opmerking:</strong> Het overzicht is dynamisch en wordt aangevuld met nieuwe tools en domeinspecifieke oplossingen.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="deelnemen" aria-labelledby="deelnemen-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="deelnemen-title">Deelnemen als bedrijf</h2>
+          <p class="section-subtitle">Wat deelnemende bedrijven ontvangen, wie kan deelnemen, en de bijdrage.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Wat u ontvangt</h3>
+            <ul class="bullets">
+              <li>Workshops en trainingen over AI-toepassingen in design, engineering en PLM.</li>
+              <li>Begeleiding bij een bedrijfsgerichte use-case (afgestemd op R&amp;D-noden), uitgevoerd door studenten.</li>
+              <li>Overzicht en evaluatie van tools, inclusief generatieve en agentic toepassingen.</li>
+              <li>Praktisch stappenplan voor veilige en effectieve AI-integratie.</li>
+              <li>Deelname aan een lerend netwerk van bedrijven.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Wie kan deelnemen</h3>
+            <ul class="bullets">
+              <li>Ontwerp- en innovatiebureaus.</li>
+              <li>R&amp;D-afdelingen van maakbedrijven (machines, elektronica, consumentenproducten, …).</li>
+              <li>Technologie- en softwarebedrijven met AI-toepassingen voor design en engineering.</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h3>Bijdrage (totaal 2 jaar)</h3>
+            <div class="table-wrap" role="region" aria-label="Tabel: bijdrage per bedrijfstype">
+              <table class="table compact">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Voorwaarde</th>
+                    <th>Bijdrage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>GO</strong></td><td>&gt; 250</td><td>€ 5.000</td></tr>
+                  <tr><td><strong>MO</strong></td><td>&gt; 50 en &lt; 250</td><td>€ 3.000</td></tr>
+                  <tr><td><strong>KO</strong></td><td>&lt; 50</td><td>€ 1.500</td></tr>
+                  <tr><td><strong>Starter</strong></td><td>&lt; 5 jaar opgericht</td><td>€ 500</td></tr>
+                  <tr><td><strong>VZW</strong></td><td></td><td>(in kind) € 1.500</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="muted small">
+              EU kmo-definitie (referentie): VLAIO — voorwaarden kmo-portefeuille.
+            </p>
+          </div>
+        </div>
+
+        <div class="card wide">
+          <h3>Waarom deelnemen?</h3>
+          <p>
+            De integratie van AI in productontwikkeling beïnvloedt competitiviteit, innovatiecapaciteit en duurzaamheid.
+            Bedrijven die de technologie vroegtijdig begrijpen en toepassen, kunnen sneller inspelen op veranderende
+            klantverwachtingen, kortere ontwikkelingscycli en nieuwe regelgeving.
+          </p>
+          <p class="emphasis">
+            AI zal in de toekomst mee bepalen welke bedrijven leiden, welke volgen en welke niet meer relevant zijn.
+          </p>
+        </div>
+
+        <div class="card wide">
+          <h3>Praktisch</h3>
+          <div class="grid-3">
+            <div class="mini">
+              <div class="mini-label">Looptijd (indicatief)</div>
+              <div class="mini-value">01/10/2026 – 30/09/2028</div>
+            </div>
+            <div class="mini">
+              <div class="mini-label">Workshops</div>
+              <div class="mini-value">6 thematische sessies (incl. update begeleidingsgroep)</div>
+            </div>
+            <div class="mini">
+              <div class="mini-label">Use-case traject</div>
+              <div class="mini-value">Design brief → kick-off → feedbackmomenten → finale presentatie</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="focus" aria-labelledby="focus-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="focus-title">Inhoudelijke focus</h2>
+          <p class="section-subtitle">Van generatieve naar agentic AI, met co-creatieve cobots en integratie in PLM/DPP-context.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Van generatieve naar agentic AI</h3>
+            <p>
+              De evolutie richting agentic AI betekent dat systemen niet enkel content genereren, maar ook doelen kunnen plannen,
+              beslissen en iteratief verbeteren binnen randvoorwaarden. Dit positioneert AI als co-creator en digitale ontwerppartner.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Samenwerking ontwerpers &amp; AI-agents</h3>
+            <div class="split">
+              <div>
+                <h4>Sterktes van de ontwerper</h4>
+                <ul class="bullets">
+                  <li>Empathie en contextbegrip</li>
+                  <li>Ethische afwegingen</li>
+                  <li>Materiaal- en productiekennis</li>
+                  <li>Creatief oordeel en stakeholderervaring</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Sterktes van AI-agents</h4>
+                <ul class="bullets">
+                  <li>Schaalbare data-analyse</li>
+                  <li>Snelle iteratie en variantgeneratie</li>
+                  <li>Patroonherkenning</li>
+                  <li>Automatische documentatie, simulatie en optimalisatie</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h4>Voorbeelden van “digitale cobot”-rollen</h4>
+            <ul class="bullets">
+              <li>AI als sparringpartner voor idee-generatie</li>
+              <li>AI als analyst voor gebruikersfeedback</li>
+              <li>AI als optimizer binnen ontwerp-constraints</li>
+              <li>AI als documenteer- en verslagagent (PLM/DMS)</li>
+            </ul>
+          </article>
+        </div>
+
+        <article class="card wide">
+          <h3>Koppeling met PLM, digitale productpaspoorten en ESPR</h3>
+          <p>
+            Toekomstige regelgeving rond digitale productpaspoorten (DPP’s) vraagt betrouwbare gegevens over o.a. herkomst, materialen,
+            herstelbaarheid en milieuprestaties. AI-ondersteunde PLM-systemen kunnen data verzamelen, valideren en actualiseren.
+          </p>
+
+          <div class="grid-3">
+            <div class="pill">
+              <div class="pill-title">ESPR-rapportage</div>
+              <div class="pill-text">Ondersteuning bij toekomstige rapportageverplichtingen.</div>
+            </div>
+            <div class="pill">
+              <div class="pill-title">Traceerbaarheid</div>
+              <div class="pill-text">Over de volledige productlevenscyclus heen.</div>
+            </div>
+            <div class="pill">
+              <div class="pill-title">Automatisering</div>
+              <div class="pill-text">Administratieve ontlasting en workflow-optimalisatie.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="mapping" aria-labelledby="mapping-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="mapping-title">Mapping van AI-tools binnen het ontwerpproces</h2>
+          <p class="section-subtitle">
+            Doorzoekbaar overzicht van processtappen, AI-use-cases, tooltypes en voorbeelden.
+          </p>
+        </div>
+
+        <div class="toolbar">
+          <label class="search" for="mapping-search">
+            <span class="sr-only">Zoeken</span>
+            <input id="mapping-search" type="search" placeholder="Zoek op use-case, tooltype of voorbeeld…" autocomplete="off" />
+          </label>
+          <div class="chips" role="list" aria-label="Filter op hoofdfase">
+            <button class="chip active" type="button" data-filter="all">Alles</button>
+            <button class="chip" type="button" data-filter="Productdefinitiefase – Ideegeneratie">Ideegeneratie</button>
+            <button class="chip" type="button" data-filter="Productdefinitiefase – Product definitie">Product definitie</button>
+            <button class="chip" type="button" data-filter="Ontwerpfase – Systeem Ontwerpen">Systeem ontwerpen</button>
+            <button class="chip" type="button" data-filter="Ontwerpfase – Concept Ontwerpen">Concept ontwerpen</button>
+            <button class="chip" type="button" data-filter="Ontwerpfase – Detail Ontwerpen">Detail ontwerpen</button>
+            <button class="chip" type="button" data-filter="Overkoepelend doorheen alle fasen">Overkoepelend</button>
+          </div>
+        </div>
+
+        <div id="mapping-accordion" class="accordion" aria-label="Tool mapping accordion">
+          <!-- gevuld via script.js -->
+        </div>
+
+        <div class="note">
+          <strong>Onderhoud:</strong> Pas de data in <code>script.js</code> aan om tools en voorbeelden eenvoudig te actualiseren.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="contact-title">Contact</h2>
+          <p class="section-subtitle">Neem contact op voor deelname, workshops of een bedrijfsgerichte use-case.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Prof. Jelle Saldien</h3>
+            <p class="muted">
+              Departement Productontwikkeling<br/>
+              Campus Paardenmarkt<br/>
+              Universiteit Antwerpen
+            </p>
+            <ul class="contact-list">
+              <li><span class="contact-label">Mobiel</span><a href="tel:+32485271981">+32 485 27 19 81</a></li>
+              <li><span class="contact-label">E-mail</span><a href="mailto:Jelle.saldien@uantwerpen.be">Jelle.saldien@uantwerpen.be</a></li>
+            </ul>
+
+            <div class="divider"></div>
+            <p class="small muted">
+              Tip: Voeg in uw interne projectoverzicht een link toe naar de externe visualisatie (Figma-site) en naar deze pagina.
+            </p>
+          </div>
+
+          <div class="card subtle">
+            <h3>Snelle actie</h3>
+            <p>Gebruik onderstaande knoppen om snel door te klikken.</p>
+            <div class="stack">
+              <a class="btn primary" href="#deelnemen">Voorwaarden &amp; bijdrage</a>
+              <a class="btn" href="#mapping">Tool mapping</a>
+              <a class="btn ghost" href="https://clip-matte-97768634.figma.site" target="_blank" rel="noreferrer">Open Figma-site</a>
+            </div>
+
+            <div class="divider"></div>
+            <p class="small muted">
+              Deze website is opgezet als een statische site (HTML/CSS/JS) en kan zonder backend gehost worden.
+            </p>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container footer-inner">
+            <div>© <span id="year"></span> Universiteit Antwerpen — TETRA: AI Powered Product Design</div>
+            <a class="back-to-top" href="#top">Terug naar boven</a>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
