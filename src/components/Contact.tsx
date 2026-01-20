@@ -1,6 +1,6 @@
 import { Mail, Building } from 'lucide-react';
 import uantwerpenLogo from 'figma:asset/1cb2ac71f09b11e719653dac260438a910c5bd79.png';
-import ugentLogo from 'figma:asset/9aa6fb2f4bf6ab524760a6d761529bd91983a137.png';
+import ugentLogo from '@/assets/logo_UGent_NL_RGB_2400_kleur_witbg.png';
 import imecLogo from 'figma:asset/ccb6f66f4bcef309f545c7e1cd0253900f6ea7f4.png';
 
 const partners = [];

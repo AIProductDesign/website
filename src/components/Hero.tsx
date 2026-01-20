@@ -4,7 +4,7 @@ import heroImage from 'figma:asset/1d9145f42e5cfc266e49a88615bff6b306221383.png'
 import sketchingImage from 'figma:asset/0e898025dbbc194ef5efbfbd10b577355e4d6195.png';
 import cadModelingImage from 'figma:asset/478eefbb756d23640c39e21a9a509152bc3eb816.png';
 import brainstormingImage from 'figma:asset/d88ed88c755f5b39737cbb8bc61160ef035556bd.png';
-import ugentLogo from 'figma:asset/9aa6fb2f4bf6ab524760a6d761529bd91983a137.png';
+import ugentLogo from '@/assets/logo_UGent_NL_RGB_2400_kleur_witbg.png';
 import uantwerpenLogo from 'figma:asset/1cb2ac71f09b11e719653dac260438a910c5bd79.png';
 
 export function Hero() {
