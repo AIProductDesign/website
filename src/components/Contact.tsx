@@ -15,7 +15,7 @@ export function Contact() {
             Dit project is een samenwerking tussen toonaangevende onderzoekspartners
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Partners */}
           <div>
@@ -23,38 +23,38 @@ export function Contact() {
               <Building className="w-6 h-6 text-blue-400" />
               <h3 className="text-2xl font-semibold">Partners</h3>
             </div>
-            
+
             {/* Partner logos */}
             <div className="mb-6 flex flex-col gap-4">
               <div className="p-4 bg-white rounded-lg">
-                <img 
-                  src={uantwerpenLogo} 
-                  alt="Universiteit Antwerpen" 
+                <img
+                  src={uantwerpenLogo}
+                  alt="Universiteit Antwerpen"
                   className="h-12 object-contain mx-auto"
                 />
                 <p className="text-sm text-gray-700 text-center mt-2">Productontwikkeling</p>
               </div>
               <div className="p-4 bg-white rounded-lg">
-                <img 
-                  src={ugentLogo} 
-                  alt="Universiteit Gent" 
+                <img
+                  src={ugentLogo}
+                  alt="Universiteit Gent"
                   className="h-12 object-contain mx-auto"
                 />
                 <p className="text-sm text-gray-700 text-center mt-2">Industrieel Ontwerpen</p>
               </div>
               <div className="p-4 bg-white rounded-lg">
-                <img 
-                  src={imecLogo} 
-                  alt="Imec" 
+                <img
+                  src={imecLogo}
+                  alt="Imec"
                   className="h-12 object-contain mx-auto"
                 />
               </div>
             </div>
-            
+
             {partners.length > 0 && (
               <ul className="space-y-4">
                 {partners.map((partner, index) => (
-                  <li 
+                  <li
                     key={index}
                     className="flex items-start gap-3 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20"
                   >
@@ -65,7 +65,7 @@ export function Contact() {
               </ul>
             )}
           </div>
-          
+
           {/* Contact */}
           <div>
             <div className="flex items-center gap-3 mb-6">
@@ -76,7 +76,7 @@ export function Contact() {
               <p className="text-lg mb-4">
                 Neem contact op met <span className="font-semibold">Jelle Saldien</span> via:
               </p>
-              <a 
+              <a
                 href="mailto:jelle.saldien@uantwerpen.be"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors font-medium"
               >
@@ -86,11 +86,11 @@ export function Contact() {
             </div>
           </div>
         </div>
-        
+
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-white/20 text-center">
           <p className="text-blue-200">
-            © 2026 AI Powered Product Design TETRA Project. Momenteel in aanvraag bij VLAIO.
+            © 2026 AI Powered Product Design TETRA Project. Momenteel in voorbereiding voor VLAIO.
           </p>
         </div>
       </div>
