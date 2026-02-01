@@ -1,5 +1,5 @@
 import { CheckCircle, Building2 } from 'lucide-react';
-import { ArrowRight } from 'lucide-react';
+import { ParticipationForm } from './ParticipationForm';
 
 const benefits = [
   {
@@ -59,7 +59,7 @@ export function Participation() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Deelnemen</h2>
         </div>
-        
+
         {/* Why participate */}
         <div className="mb-16">
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">Waarom deelnemen?</h3>
@@ -67,7 +67,7 @@ export function Participation() {
             De integratie van AI bepaalt in toenemende mate uw competitiviteit en innovatiecapaciteit. Dit project biedt de kans om in een veilige, praktijkgerichte omgeving kennis op te bouwen. Bedrijven die deze technologie vroegtijdig omarmen, zullen de nieuwe standaard in de markt bepalen.
           </p>
         </div>
-        
+
         {/* For whom */}
         <div className="mb-16">
           <h3 className="text-2xl font-semibold text-gray-900 mb-6">Voor wie?</h3>
@@ -84,7 +84,7 @@ export function Participation() {
             ))}
           </div>
         </div>
-        
+
         {/* What you receive */}
         <div className="mb-16">
           <h3 className="text-2xl font-semibold text-gray-900 mb-6">Wat u ontvangt</h3>
@@ -100,14 +100,14 @@ export function Participation() {
             ))}
           </div>
         </div>
-        
+
         {/* Pricing table */}
         <div>
           <h3 className="text-2xl font-semibold text-gray-900 mb-2">Bijdrage (Totaal voor 2 jaar)</h3>
           <p className="text-gray-600 mb-6">
             Onder voorbehoud van goedkeuring. Projectlooptijd: 01/10/2026 t/m 30/09/2028.
           </p>
-          
+
           <div className="overflow-x-auto">
             <table className="w-full bg-white rounded-xl shadow-md overflow-hidden">
               <thead>
@@ -119,11 +119,10 @@ export function Participation() {
               </thead>
               <tbody>
                 {pricing.map((row, index) => (
-                  <tr 
+                  <tr
                     key={index}
-                    className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${
-                      index === pricing.length - 1 ? 'border-b-0' : ''
-                    }`}
+                    className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${index === pricing.length - 1 ? 'border-b-0' : ''
+                      }`}
                   >
                     <td className="px-6 py-4 font-medium text-gray-900">{row.type}</td>
                     <td className="px-6 py-4 text-gray-700">{row.condition}</td>
@@ -133,18 +132,10 @@ export function Participation() {
               </tbody>
             </table>
           </div>
-          
-          {/* Call to action button */}
-          <div className="mt-8 text-center">
-            <a 
-              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl group"
-            >
-              <span className="text-lg font-semibold">Meld uw bedrijf aan</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            </a>
+
+          {/* Participation Form */}
+          <div id="participation-form" className="mt-8">
+            <ParticipationForm />
           </div>
         </div>
       </div>

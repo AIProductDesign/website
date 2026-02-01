@@ -33,9 +33,7 @@ export function Navigation() {
               </a>
             ))}
             <a
-              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#participation-form"
               className="px-6 py-2 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold shadow-lg hover:shadow-xl"
             >
               Neem deel
@@ -69,9 +67,7 @@ export function Navigation() {
               </a>
             ))}
             <a
-              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#participate"
               onClick={() => setIsOpen(false)}
               className="block mt-2 py-3 px-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold text-center"
             >

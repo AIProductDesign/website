@@ -1,4 +1,4 @@
-import { Lightbulb, Palette, Cog, TestTube, Rocket } from 'lucide-react';
+import { Lightbulb, Palette, Cog, TestTube, Rocket, ChevronDown } from 'lucide-react';
 
 const mappingData = [
   {
@@ -47,15 +47,30 @@ export function Mapping() {
             Mapping van AI-tools in het New Product Design-proces
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Het project biedt een helder kader voor de meerwaarde van AI in elke fase van productontwikkeling.
+            Neem hier een kijkje naar ons prototype van de AI Powered Product Design Toolkit:
           </p>
+
+          <div className="mt-6 flex justify-center">
+            <ChevronDown className="w-8 h-8 text-gray-400 animate-bounce" />
+          </div>
+          <div className="mt-4 text-center">
+            <a
+              href="https://www.aippd.be"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-md hover:from-blue-700 hover:to-purple-700 transition-colors max-w-md mx-auto"
+            >
+              <span className="font-semibold">Prototype AIPPD Toolkit</span>
+            </a>
+            <p className="text-xl text-gray-600 mt-8">Een helder kader voor de meerwaarde van AI in elke fase van productontwikkeling.</p>
+          </div>
         </div>
-        
+
         <div className="space-y-6">
           {mappingData.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div 
+              <div
                 key={index}
                 className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow"
               >
@@ -67,7 +82,7 @@ export function Mapping() {
                     </div>
                     <h3 className="text-xl font-bold">{item.phase}</h3>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="md:w-2/3 p-6 space-y-3">
                     <div>
@@ -76,14 +91,14 @@ export function Mapping() {
                       </h4>
                       <p className="text-gray-800">{item.applications}</p>
                     </div>
-                    
+
                     <div>
                       <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">
                         Typische tools / technologieën
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {item.tools.split(', ').map((tool, toolIndex) => (
-                          <span 
+                          <span
                             key={toolIndex}
                             className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
                           >
