@@ -1,5 +1,5 @@
 import { CheckCircle, Building2 } from 'lucide-react';
-import { ParticipationForm } from './ParticipationForm';
+import { ArrowRight } from 'lucide-react';
 
 const benefits = [
   {
@@ -133,9 +133,17 @@ export function Participation() {
             </table>
           </div>
 
-          {/* Participation Form */}
-          <div id="participation-form" className="mt-8">
-            <ParticipationForm />
+          {/* Call to action button */}
+          <div className="mt-8 text-center">
+            <a 
+              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl group"
+            >
+              <span className="text-lg font-semibold">Meld uw bedrijf aan</span>
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
         </div>
       </div>

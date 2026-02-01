@@ -37,24 +37,16 @@ export function Hero() {
               Neem deel als bedrijf en ontdek de toekomst van product design
             </p>
 
-            <div className="pt-4 space-y-4">
+            <div className="pt-4">
               <a
-                href="https://www.aippd.be"
+                href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl font-semibold"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl group"
               >
-                Prototype AIPPD Toolkit
+                <span className="text-lg font-semibold">Neem deel aan het project</span>
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </a>
-              <div>
-                <a
-                  href="#participate"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl group"
-                >
-                  <span className="text-lg font-semibold">Neem deel aan het project</span>
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
             </div>
 
             {/* Partner logos */}
