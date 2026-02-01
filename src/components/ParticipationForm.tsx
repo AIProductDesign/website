@@ -22,7 +22,7 @@ export function ParticipationForm() {
         }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         // Validation
@@ -36,45 +36,44 @@ export function ParticipationForm() {
         setSubmitStatus('idle');
         setErrorMessage('');
 
-        try {
-            // Send form data using FormSubmit service
-            const response = await fetch('https://formsubmit.co/jelle.saldien@uantwerpen.be', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: formData.name,
-                    company: formData.company,
-                    email: formData.email,
-                    phone: formData.phone || 'Niet ingevuld',
-                    motivation: formData.motivation,
-                    _subject: `Nieuwe aanmelding: ${formData.company}`,
-                    _template: 'table'
-                })
+        // Submit form using FormSubmit via form submission
+        const form = e.currentTarget;
+        const formElement = form as HTMLFormElement;
+        
+        // Create FormData from the form
+        const submitForm = new FormData();
+        submitForm.append('name', formData.name);
+        submitForm.append('company', formData.company);
+        submitForm.append('email', formData.email);
+        submitForm.append('phone', formData.phone || 'Niet ingevuld');
+        submitForm.append('motivation', formData.motivation);
+        submitForm.append('_subject', `Nieuwe aanmelding: ${formData.company}`);
+        submitForm.append('_template', 'table');
+
+        fetch('https://formsubmit.co/jelle.saldien@uantwerpen.be', {
+            method: 'POST',
+            body: submitForm,
+        })
+            .then(() => {
+                setSubmitStatus('success');
+                setFormData({
+                    name: '',
+                    company: '',
+                    email: '',
+                    phone: '',
+                    motivation: ''
+                });
+                
+                setTimeout(() => setSubmitStatus('idle'), 5000);
+            })
+            .catch((error) => {
+                setSubmitStatus('error');
+                setErrorMessage('Er is een fout opgetreden bij het verzenden');
+                console.error('Form submission error:', error);
+            })
+            .finally(() => {
+                setIsSubmitting(false);
             });
-
-            if (!response.ok) {
-                throw new Error('Formulier kon niet worden verzonden');
-            }
-
-            setSubmitStatus('success');
-            setFormData({
-                name: '',
-                company: '',
-                email: '',
-                phone: '',
-                motivation: ''
-            });
-
-            // Reset success message after 5 seconds
-            setTimeout(() => setSubmitStatus('idle'), 5000);
-        } catch (error) {
-            setSubmitStatus('error');
-            setErrorMessage(error instanceof Error ? error.message : 'Er is een fout opgetreden');
-        } finally {
-            setIsSubmitting(false);
-        }
     };
 
     return (
