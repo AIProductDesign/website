@@ -58,7 +58,7 @@ export function Contact() {
         {/* Partner logos */}
         <div className="reveal" style={{ transitionDelay: '80ms' }}>
           <p className="text-xs font-mono text-[#1D1D1F]/70 tracking-widest mb-8">ONDERZOEKSPARTNERS</p>
-          <div className="flex flex-wrap items-center gap-10">
+          <div className="flex flex-wrap items-center justify-between gap-6 w-full">
             {partners.map((p) => (
               <div key={p.name} className="flex items-center gap-3">
                 <img
