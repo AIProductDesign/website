@@ -33,7 +33,8 @@
       "Bash(sed -i 's/text-\\\\[#1D1D1F\\\\]\\\\/30/text-[#1D1D1F]\\\\/50/g' src/components/CaseStudies.tsx src/components/Contact.tsx src/components/Participation.tsx src/components/PartnerCarousel.tsx src/components/Questions.tsx)",
       "Bash(git remote:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
