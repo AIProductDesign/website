@@ -34,7 +34,9 @@
       "Bash(git remote:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:antons-variant.vercel.app)",
+      "Bash(curl:*)"
     ]
   }
 }
