@@ -29,14 +29,14 @@ export function Contact() {
     <section id="contact" className="bg-white pt-4 pb-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12">
         <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-6">06 / CONTACT</p>
-        <div className="reveal-line h-px bg-black/8 mb-16" />
+        <div className="reveal-line h-px bg-black/8 mb-10" />
 
-        <div className="reveal-heading mb-20">
+        <div className="reveal-heading mb-10">
           <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F] tracking-tight">Nog een vraag?</span>
         </div>
 
         {/* Contact cards */}
-        <div className="reveal-stagger grid sm:grid-cols-2 gap-4 max-w-2xl mb-20">
+        <div className="reveal-stagger grid sm:grid-cols-2 gap-4 max-w-2xl mb-12">
           {people.map((p) => (
             <div key={p.email} className="card-hover p-7 bg-[#F5F5F7] border border-black/6 rounded-2xl flex flex-col gap-4">
               <div>
