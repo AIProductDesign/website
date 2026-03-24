@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.tsx$\")",
+      "Bash(npm install:*)",
+      "Bash(gh api:*)",
+      "Bash(curl -s https://api.github.com/repos/AIProductDesign/website)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''visibility:'''', d.get\\(''''visibility''''\\)\\); print\\(''''has_pages:'''', d.get\\(''''has_pages''''\\)\\); print\\(''''homepage:'''', d.get\\(''''homepage''''\\)\\); print\\(''''private:'''', d.get\\(''''private''''\\)\\)\")",
+      "WebFetch(domain:www.raakdesign.com)",
+      "WebSearch",
+      "WebFetch(domain:www.designdirectory.com)",
+      "Bash(grep -E \"\\\\.\\(config|json|ts\\)$\")",
+      "Bash(npm run:*)",
+      "Bash(node -e \":*)",
+      "Bash(powershell.exe -Command \"$src = 'C:\\\\\\\\Users\\\\\\\\antvervoort\\\\\\\\website-variant\\\\\\\\src\\\\\\\\assets\\\\\\\\aidec-logo.png'; $dst = 'C:\\\\\\\\Users\\\\\\\\antvervoort\\\\\\\\website-variant\\\\\\\\src\\\\\\\\assets\\\\\\\\aidec-logo-opt.png'; Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\($src\\); $w = 900; $h = [int]\\($img.Height * $w / $img.Width\\); $bmp = New-Object System.Drawing.Bitmap\\($w, $h\\); $g = [System.Drawing.Graphics]::FromImage\\($bmp\\); $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic; $g.DrawImage\\($img, 0, 0, $w, $h\\); $enc = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders\\(\\) | Where-Object { $_.MimeType -eq 'image/png' }; $bmp.Save\\($dst, [System.Drawing.Imaging.ImageFormat]::Png\\); $g.Dispose\\(\\); $bmp.Dispose\\(\\); $img.Dispose\\(\\); Write-Host 'Done'\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\antvervoort\\\\website-variant\\\\resize-logo.ps1\")",
+      "WebFetch(domain:localhost)",
+      "Bash(grep:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(powershell.exe -Command \"Get-ChildItem 'C:\\\\\\\\Users\\\\\\\\antvervoort\\\\\\\\Desktop\\\\\\\\' | Select-Object Name, Extension | Format-Table\")",
+      "Bash(cmd.exe /c \"dir \\\\\"C:\\\\Users\\\\antvervoort\\\\Desktop\\\\\" /B\" 2>&1)",
+      "Bash(cmd.exe /c dir \"%USERPROFILE%\\\\Desktop\" /B 2>&1)",
+      "Bash(cmd.exe /c 'dir C:\\\\Users\\\\antvervoort\\\\Desktop')",
+      "Bash(cp \"/c/Users/antvervoort/OneDrive - Universiteit Antwerpen/Bureaublad/UAntwerpen logo.png\" \"/c/Users/antvervoort/website-variant/src/assets/uantwerpen-logo-new.png\")",
+      "Bash(cp \"/c/Users/antvervoort/OneDrive - Universiteit Antwerpen/Bureaublad/Afbeelding2.png\" \"/c/Users/antvervoort/website-variant/src/assets/ugent-logo-new.png\")",
+      "Bash(cmd.exe /c \"dir C:\\\\Users\\\\antvervoort\\\\Desktop\\\\*.png C:\\\\Users\\\\antvervoort\\\\Desktop\\\\*.jpg C:\\\\Users\\\\antvervoort\\\\Desktop\\\\*.svg C:\\\\Users\\\\antvervoort\\\\Desktop\\\\*.jpeg 2>&1\")",
+      "Bash(cp \"/c/Users/antvervoort/Downloads/VLAIO.png\" \"/c/Users/antvervoort/website-variant/src/assets/vlaio-logo.png\")",
+      "Bash(cmd.exe /c \"copy \"\"C:\\\\Users\\\\antvervoort\\\\Downloads\\\\VLAIO.png\"\" \"\"C:\\\\Users\\\\antvervoort\\\\website-variant\\\\src\\\\assets\\\\vlaio-logo.png\"\"\")",
+      "Bash(sed -i 's/text-\\\\[#1D1D1F\\\\]\\\\/20/text-[#1D1D1F]\\\\/40/g' src/components/About.tsx src/components/CaseStudies.tsx src/components/Mapping.tsx)",
+      "Bash(sed -i 's/text-\\\\[#1D1D1F\\\\]\\\\/25/text-[#1D1D1F]\\\\/45/g' src/components/Mapping.tsx src/components/Contact.tsx)",
+      "Bash(sed -i 's/text-\\\\[#1D1D1F\\\\]\\\\/30/text-[#1D1D1F]\\\\/50/g' src/components/CaseStudies.tsx src/components/Contact.tsx src/components/Participation.tsx src/components/PartnerCarousel.tsx src/components/Questions.tsx)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

@@ -1,78 +1,83 @@
-import { Zap, Map, Users, Shield } from 'lucide-react';
-import { ExternalLink } from 'lucide-react';
+import { Zap, Map, Users, TrendingUp, ExternalLink } from 'lucide-react';
 
 const focusPoints = [
   {
     icon: Zap,
-    title: 'Technologietransfer',
-    description: 'Wij vertalen technologieën zoals LLM, RAG en Agentic AI naar bruikbare tools voor elke fase van uw ontwikkelingsproces.'
+    title: 'Direct toegang tot AI-kennis en innovaties',
+    description: 'Blijf up-to-date met de nieuwste AI-ontwikkelingen en onderzoek binnen UA, vertaald naar concrete toepassingen voor productontwikkeling.',
   },
   {
     icon: Map,
-    title: 'Procesmapping',
-    description: 'We scheppen orde in de chaos van AI-tools door ze te mappen op het NPD-proces. Zo ziet u direct welke tool waar inzetbaar is.'
+    title: 'Concrete tools, methodes en workflows',
+    description: 'Werk met praktische toolkits en bewezen methodes die je helpen AI effectief toe te passen in je organisatie.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Van inzichten naar directe impact',
+    description: 'Vertaal data en analyses naar concrete ontwerpkeuzes, productverbeteringen en circulaire innovaties.',
   },
   {
     icon: Users,
-    title: 'Mens–AI Samenwerking',
-    description: 'Net als bij "cobots" in de productie, onderzoeken we hoe ontwerpers en AI-agents optimaal kunnen samenwerken in co-creatieve workflows.'
+    title: 'Sterk netwerk van bedrijven en experten',
+    description: 'Leer van andere bedrijven, wissel ervaringen uit en ontdek hoe AI vandaag al wordt ingezet in industriële contexten.',
   },
-  {
-    icon: Shield,
-    title: 'Veilige Integratie',
-    description: 'We testen hoe AI-inzichten veilig en traceerbaar gekoppeld kunnen worden aan uw bestaande Document Management Systemen (DMS) en PLM-omgevingen.'
-  }
 ];
 
 export function About() {
   return (
-    <section id="about" className="py-20 bg-gray-50">
+    <section id="about" className="bg-white pt-4 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Over het project</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Wij gaan verder dan de hype en bieden gestructureerde inzichten en praktische implementaties voor de ontwerppraktijk.
-          </p>
-        </div>
-        
-        <div className="mb-12">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-8 text-center">Onze focuspunten</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {focusPoints.map((point, index) => {
-              const Icon = point.icon;
-              return (
-                <div 
-                  key={index}
-                  className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">{point.title}</h4>
-                  <p className="text-gray-600 leading-relaxed">{point.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        
-        {/* TETRA info box */}
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200 rounded-xl p-6 shadow-md">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-3">Wat is een TETRA-project?</h3>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              TETRA-projecten worden door VLAIO ondersteund om de kenniskloof tussen onderzoek en bedrijfspraktijk te dichten. Ze vertalen nieuwe technologische inzichten naar concrete tools en methodes die direct toepasbaar zijn in bedrijven.
+        <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-6">01 / WAAROM AIPEC</p>
+        <div className="reveal-line h-px bg-black/8 mb-14" />
+
+        {/* Two-column: heading left, description right */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-end mb-14">
+          <h2>
+            <div className="reveal-heading mb-2">
+              <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">
+                AI dat uw ontwerpteam
+              </span>
+            </div>
+            <div className="reveal-heading" style={{ transitionDelay: '100ms' }}>
+              <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F]/75 leading-[1.05] tracking-tight">
+                versterkt.
+              </span>
+            </div>
+          </h2>
+
+          <div>
+            <p className="reveal text-base text-[#4A4A4F] leading-relaxed mb-6" style={{ transitionDelay: '80ms' }}>
+              <span style={{ fontFamily: "'Dyson Sans Modern', sans-serif" }}>aipec</span> levert toolkits, begeleide workshops en bedrijfsspecifieke use-cases, zodat uw
+              ontwerpteam AI morgen kan toepassen, niet pas na jaren onderzoek. Als TETRA-project
+              ondersteund door VLAIO, dichten wij de kenniskloof tussen onderzoek en bedrijf.
             </p>
-            <a 
-              href="https://www.vlaio.be/nl/vlaio-netwerk/tetra"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors"
-            >
-              Meer info over TETRA bij VLAIO
-              <ExternalLink className="w-4 h-4" />
-            </a>
+            <div className="reveal" style={{ transitionDelay: '130ms' }}>
+              <a
+                href="https://www.vlaio.be/nl/vlaio-netwerk/tetra"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs text-[#4B9FFF]/70 hover:text-[#4B9FFF] transition-colors"
+              >
+                Meer over TETRA
+                <ExternalLink className="w-2.5 h-2.5" />
+              </a>
+            </div>
           </div>
+        </div>
+
+        {/* Four focus points — no box, just divider lines */}
+        <div className="reveal-stagger flex flex-col sm:flex-row">
+          {focusPoints.map((point, i) => {
+            const Icon = point.icon;
+            return (
+              <div key={point.title} className="flex-1 flex flex-col gap-2.5 py-6 sm:px-6 first:pl-0 last:pr-0 relative border-b sm:border-b-0 border-black/6 last:border-0">
+                {i > 0 && <div className="hidden sm:block absolute left-0 inset-y-0 w-px bg-black/6" />}
+                <Icon className="w-4 h-4 text-[#4B9FFF] flex-shrink-0" />
+                <p className="text-sm font-semibold text-[#1D1D1F] leading-snug">{point.title}</p>
+                <p className="text-xs text-[#4A4A4F] leading-relaxed">{point.description}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

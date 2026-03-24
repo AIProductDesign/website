@@ -1,96 +1,84 @@
-import { Mail, Building } from 'lucide-react';
-import uantwerpenLogo from 'figma:asset/1cb2ac71f09b11e719653dac260438a910c5bd79.png';
-import ugentLogo from '@/assets/logo_UGent_NL_RGB_2400_kleur_witbg.png';
-import imecLogo from 'figma:asset/ccb6f66f4bcef309f545c7e1cd0253900f6ea7f4.png';
+import { Mail } from 'lucide-react';
+import uantwerpenLogo from '@/assets/uantwerpen-logo-new.png';
+import ugentLogo from '@/assets/ugent-logo-new.png';
+import imecLogo from '@/assets/ccb6f66f4bcef309f545c7e1cd0253900f6ea7f4.png';
 
-const partners = [];
+const people = [
+  {
+    role: 'Projectleider',
+    name: 'Jelle Saldien',
+    email: 'jelle.saldien@uantwerpen.be',
+    affiliation: 'Universiteit Antwerpen',
+  },
+  {
+    role: 'Onderzoeker',
+    name: 'Anton Vervoort, PhD',
+    email: 'anton.vervoort@uantwerpen.be',
+    affiliation: 'Universiteit Antwerpen',
+  },
+];
+
+const partners = [
+  { logo: uantwerpenLogo, name: 'Universiteit Antwerpen', dept: 'Productontwikkeling', white: true },
+  { logo: ugentLogo,      name: 'Universiteit Gent',      dept: 'Industrieel Ontwerpen', white: true },
+  { logo: imecLogo,       name: 'Imec',                   dept: 'Technologie & AI', white: false },
+];
 
 export function Contact() {
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+    <section id="contact" className="bg-white pt-4 pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">Contact & Partners</h2>
-          <p className="text-xl text-blue-100">
-            Dit project is een samenwerking tussen toonaangevende onderzoekspartners
-          </p>
+        <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-6">06 / CONTACT</p>
+        <div className="reveal-line h-px bg-black/8 mb-16" />
+
+        <div className="reveal-heading mb-20">
+          <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F] tracking-tight">Nog een vraag?</span>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
-          {/* Partners */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <Building className="w-6 h-6 text-blue-400" />
-              <h3 className="text-2xl font-semibold">Partners</h3>
-            </div>
-
-            {/* Partner logos */}
-            <div className="mb-6 flex flex-col gap-4">
-              <div className="p-4 bg-white rounded-lg">
-                <img
-                  src={uantwerpenLogo}
-                  alt="Universiteit Antwerpen"
-                  className="h-12 object-contain mx-auto"
-                />
-                <p className="text-sm text-gray-700 text-center mt-2">Productontwikkeling</p>
+        {/* Contact cards */}
+        <div className="reveal-stagger grid sm:grid-cols-2 gap-4 max-w-2xl mb-20">
+          {people.map((p) => (
+            <div key={p.email} className="card-hover p-7 bg-[#F5F5F7] border border-black/6 rounded-2xl flex flex-col gap-4">
+              <div>
+                <p className="text-xs font-mono text-[#1D1D1F]/70 tracking-widest mb-1">{p.role}</p>
+                <p className="text-xl font-bold text-[#1D1D1F] tracking-tight">{p.name}</p>
+                <p className="text-xs text-[#4A4A4F] mt-0.5">{p.affiliation}</p>
               </div>
-              <div className="p-4 bg-white rounded-lg">
-                <img
-                  src={ugentLogo}
-                  alt="Universiteit Gent"
-                  className="h-12 object-contain mx-auto"
-                />
-                <p className="text-sm text-gray-700 text-center mt-2">Industrieel Ontwerpen</p>
-              </div>
-              <div className="p-4 bg-white rounded-lg">
-                <img
-                  src={imecLogo}
-                  alt="Imec"
-                  className="h-12 object-contain mx-auto"
-                />
-              </div>
-            </div>
-
-            {partners.length > 0 && (
-              <ul className="space-y-4">
-                {partners.map((partner, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start gap-3 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20"
-                  >
-                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-lg">{partner}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          {/* Contact */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <Mail className="w-6 h-6 text-blue-400" />
-              <h3 className="text-2xl font-semibold">Vragen?</h3>
-            </div>
-            <div className="p-6 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
-              <p className="text-lg mb-4">
-                Neem contact op met <span className="font-semibold">Jelle Saldien</span> via:
-              </p>
               <a
-                href="mailto:jelle.saldien@uantwerpen.be"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors font-medium"
+                href={`mailto:${p.email}`}
+                className="inline-flex items-center gap-2 text-sm text-[#4B9FFF] font-medium hover:text-[#2280E8] transition-colors"
               >
-                <Mail className="w-5 h-5" />
-                jelle.saldien@uantwerpen.be
+                <Mail className="w-3.5 h-3.5 flex-shrink-0" />
+                {p.email}
               </a>
             </div>
+          ))}
+        </div>
+
+        {/* Partner logos */}
+        <div className="reveal" style={{ transitionDelay: '80ms' }}>
+          <p className="text-xs font-mono text-[#1D1D1F]/70 tracking-widest mb-8">ONDERZOEKSPARTNERS</p>
+          <div className="flex flex-wrap items-center gap-10">
+            {partners.map((p) => (
+              <div key={p.name} className="flex items-center gap-3">
+                <img
+                  src={p.logo}
+                  alt={p.name}
+                  className="h-8 object-contain"
+                  style={p.white ? { filter: 'brightness(0)', opacity: 0.65 } : { mixBlendMode: 'multiply', opacity: 0.8 }}
+                />
+                <div>
+                  <p className="text-sm font-semibold text-[#1D1D1F]">{p.name}</p>
+                  <p className="text-xs text-[#1D1D1F]/75 font-mono">{p.dept}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-16 pt-8 border-t border-white/20 text-center">
-          <p className="text-blue-200">
-            © 2026 AI Powered Product Design TETRA Project. Momenteel in voorbereiding voor VLAIO.
+        <div className="reveal mt-24 pt-8 border-t border-black/6" style={{ transitionDelay: '100ms' }}>
+          <p className="font-mono text-xs text-[#1D1D1F]/75 tracking-wide">
+            © 2026 <span style={{ fontFamily: "'Dyson Sans Modern', sans-serif" }}>aipec</span> · AI-driven Design Engineering Center · TETRA project in voorbereiding voor VLAIO.
           </p>
         </div>
       </div>

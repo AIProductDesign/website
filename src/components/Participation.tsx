@@ -1,150 +1,124 @@
-import { CheckCircle, Building2 } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
 
 const benefits = [
-  {
-    title: '6 Thematische contactmomenten',
-    description: 'Met strategische kennistransfer en updates van use-cases.'
-  },
-  {
-    title: '8 Verdiepende workshops',
-    description: '(4/jaar) focus op hands-on AI-tools gericht naar de ontwerpers.'
-  },
-  {
-    title: 'Begeleiding bij use-cases',
-    description: 'Directe ondersteuning bij een bedrijfsspecifieke case, uitgevoerd door onderzoekers en studenten.'
-  },
-  {
-    title: 'Praktisch stappenplan',
-    description: 'Een gids voor veilige en effectieve AI-integratie in uw bedrijf.'
-  },
-  {
-    title: 'Lerend netwerk',
-    description: 'Wissel ervaringen uit met een selecte groep van sectorgenoten.'
-  }
+  { title: '6 Thematische contactmomenten', description: 'Met strategische kennistransfer en updates van use-cases.' },
+  { title: '8 Verdiepende workshops', description: '(4/jaar) focus op hands-on AI-tools gericht naar de ontwerpers.' },
+  { title: 'Lerend netwerk', description: 'Word deel van een netwerk van bedrijven en experten die actief experimenteren met AI in productontwikkeling en deel ervaringen, use-cases en best practices.' },
+  { title: 'Exclusieve inzichten', description: 'Krijg exclusieve inzichten in de nieuwste AI-ontwikkelingen en onderzoek binnen UA, vertaald naar concrete toepassingen voor productontwikkeling.' },
+  { title: 'Studentencase', description: 'Optie om een bedrijfsspecifieke vraag in te dienen die door studenten van UAntwerpen of UGent wordt uitgewerkt tot een concrete oplossing.' },
 ];
 
 const pricing = [
-  {
-    type: 'GO (Grote Onderneming)',
-    condition: '> 250 werknemers',
-    price: '€ 5.000'
-  },
-  {
-    type: 'MO (Middelgrote Onderneming)',
-    condition: '50 - 250 werknemers',
-    price: '€ 3.000'
-  },
-  {
-    type: 'KO (Kleine Onderneming)',
-    condition: '< 50 werknemers',
-    price: '€ 1.500'
-  },
-  {
-    type: 'Starter',
-    condition: '< 5 jaar opgericht',
-    price: '€ 500'
-  },
-  {
-    type: 'VZW',
-    condition: '-',
-    price: '€ 1.500 (in kind)'
-  }
+  { type: 'Grote Onderneming', condition: '> 250 werknemers', price: '€ 5.000' },
+  { type: 'Middelgrote Onderneming', condition: '50 – 250 werknemers', price: '€ 3.000' },
+  { type: 'Kleine Onderneming', condition: '< 50 werknemers', price: '€ 1.500' },
+  { type: 'Starter', condition: '< 5 jaar opgericht', price: '€ 500' },
+  { type: 'VZW', condition: '–', price: '€ 1.500' },
+];
+
+const targets = [
+  'Ontwerp- en innovatiebureaus',
+  'R&D-afdelingen van maakbedrijven',
+  'Technologiebedrijven met AI-oplossingen voor design en engineering',
 ];
 
 export function Participation() {
   return (
-    <section id="participate" className="py-20 bg-gray-50">
+    <section id="participate" className="bg-white pt-4 pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Deelnemen</h2>
-        </div>
+        <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-6">05 / DEELNEMEN</p>
+        <div className="reveal-line h-px bg-black/8 mb-16" />
 
-        {/* Why participate */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-4">Waarom deelnemen?</h3>
-          <p className="text-lg text-gray-700 leading-relaxed max-w-4xl">
-            De integratie van AI bepaalt in toenemende mate uw competitiviteit en innovatiecapaciteit. Dit project biedt de kans om in een veilige, praktijkgerichte omgeving kennis op te bouwen. Bedrijven die deze technologie vroegtijdig omarmen, zullen de nieuwe standaard in de markt bepalen.
+        {/* Hero heading + intro */}
+        <div className="max-w-3xl mb-16">
+          <div className="reveal-heading mb-6">
+            <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F] tracking-tight">Word projectpartner.</span>
+          </div>
+          <p className="reveal text-lg text-[#4A4A4F] leading-relaxed" style={{ transitionDelay: '80ms' }}>
+            De integratie van AI bepaalt in toenemende mate uw competitiviteit en innovatiecapaciteit.
+            Bedrijven die deze technologie vroegtijdig omarmen, bepalen de nieuwe standaard.
           </p>
         </div>
 
-        {/* For whom */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">Voor wie?</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              'Ontwerp- en innovatiebureaus.',
-              'R&D-afdelingen van maakbedrijven (machines, elektronica, consumentenproducten, etc.).',
-              'Technologiebedrijven met AI-oplossingen voor design en engineering.'
-            ].map((text, index) => (
-              <div key={index} className="flex items-start gap-3 p-4 bg-white rounded-lg border border-gray-200">
-                <Building2 className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                <p className="text-gray-700">{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {/* What you receive */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">Wat u ontvangt</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start gap-4 p-6 bg-white rounded-xl shadow-sm border border-gray-200">
-                <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">{benefit.title}</h4>
-                  <p className="text-gray-600">{benefit.description}</p>
+        {/* Two-column: voor wie + wat u ontvangt */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+
+          {/* Voor wie */}
+          <div className="reveal">
+            <p className="text-xs font-mono text-[#1D1D1F]/70 tracking-widest mb-5">VOOR WIE</p>
+            <div className="space-y-2">
+              {targets.map((text, i) => (
+                <div key={i} className="flex items-start gap-3 py-4 border-b border-black/5 last:border-0">
+                  <span className="text-[#4B9FFF] font-bold text-xs mt-0.5 flex-shrink-0">→</span>
+                  <p className="text-sm text-[#1D1D1F]/70 leading-relaxed">{text}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Wat u ontvangt */}
+          <div className="reveal" style={{ transitionDelay: '60ms' }}>
+            <p className="text-xs font-mono text-[#1D1D1F]/70 tracking-widest mb-5">WAT U ONTVANGT</p>
+            <div className="space-y-2">
+              {benefits.map((b, i) => (
+                <div key={i} className="flex items-start gap-3 py-3.5 border-b border-black/5 last:border-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4B9FFF] flex-shrink-0 mt-1.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-[#1D1D1F] leading-snug">{b.title}</p>
+                    <p className="text-xs text-[#4A4A4F] mt-0.5">{b.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Pricing table */}
-        <div>
-          <h3 className="text-2xl font-semibold text-gray-900 mb-2">Bijdrage (Totaal voor 2 jaar)</h3>
-          <p className="text-gray-600 mb-6">
-            Onder voorbehoud van goedkeuring. Projectlooptijd: 01/10/2026 t/m 30/09/2028.
-          </p>
+        {/* Pricing */}
+        <div className="reveal mb-14" style={{ transitionDelay: '60ms' }}>
+          <p className="text-xs font-mono text-[#1D1D1F]/70 tracking-widest mb-1">BIJDRAGE (TOTAAL VOOR 2 JAAR)</p>
+          <p className="text-xs text-[#1D1D1F]/50 mb-8 font-mono">Onder voorbehoud van goedkeuring · 01/10/2026 t/m 30/09/2028</p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-xl shadow-md overflow-hidden">
+          <div className="overflow-x-auto rounded-2xl border border-black/6">
+            <table className="w-full">
               <thead>
-                <tr className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                  <th className="px-6 py-4 text-left font-semibold">Type Bedrijf</th>
-                  <th className="px-6 py-4 text-left font-semibold">Voorwaarde</th>
-                  <th className="px-6 py-4 text-left font-semibold">Bijdrage voor 2 jaar</th>
+                <tr className="border-b border-black/6 bg-[#F5F5F7]">
+                  <th className="px-6 py-4 text-left text-xs font-mono text-[#1D1D1F]/70 tracking-widest">TYPE</th>
+                  <th className="px-6 py-4 text-left text-xs font-mono text-[#1D1D1F]/70 tracking-widest">VOORWAARDE</th>
+                  <th className="px-6 py-4 text-left text-xs font-mono text-[#1D1D1F]/70 tracking-widest">BIJDRAGE</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="bg-[#F5F5F7]">
                 {pricing.map((row, index) => (
                   <tr
                     key={index}
-                    className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${index === pricing.length - 1 ? 'border-b-0' : ''
-                      }`}
+                    className={`hover:bg-white/60 transition-colors ${index < pricing.length - 1 ? 'border-b border-black/4' : ''}`}
                   >
-                    <td className="px-6 py-4 font-medium text-gray-900">{row.type}</td>
-                    <td className="px-6 py-4 text-gray-700">{row.condition}</td>
-                    <td className="px-6 py-4 font-semibold text-blue-600">{row.price}</td>
+                    <td className="px-6 py-4 text-sm font-semibold text-[#1D1D1F]">{row.type}</td>
+                    <td className="px-6 py-4 text-sm text-[#4A4A4F]">{row.condition}</td>
+                    <td className="px-6 py-4 text-sm font-mono font-bold text-[#4B9FFF]">{row.price}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+        </div>
 
-          {/* Call to action button */}
-          <div className="mt-8 text-center">
-            <a 
-              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl group"
-            >
-              <span className="text-lg font-semibold">Meld uw bedrijf aan</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            </a>
+        {/* CTA */}
+        <div className="reveal border border-black/8 rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6" style={{ transitionDelay: '80ms' }}>
+          <div>
+            <p className="text-base font-semibold text-[#1D1D1F] mb-1">Interesse om deel te nemen?</p>
+            <p className="text-sm text-[#4A4A4F] max-w-md">Vul het formulier in en we nemen contact op om te kijken of het project past bij uw bedrijf.</p>
           </div>
+          <a
+            href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-shrink-0 inline-flex items-center gap-2.5 px-6 py-3 bg-[#1D1D1F] text-white rounded-full font-semibold hover:bg-[#1D1D1F]/80 transition-colors group text-sm"
+          >
+            Neem deel
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </div>
     </section>

@@ -1,126 +1,128 @@
-import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ArrowRight } from 'lucide-react';
-import heroImage from 'figma:asset/1d9145f42e5cfc266e49a88615bff6b306221383.png';
-import sketchingImage from 'figma:asset/0e898025dbbc194ef5efbfbd10b577355e4d6195.png';
-import cadModelingImage from 'figma:asset/478eefbb756d23640c39e21a9a509152bc3eb816.png';
-import brainstormingImage from 'figma:asset/d88ed88c755f5b39737cbb8bc61160ef035556bd.png';
-import ugentLogo from '@/assets/logo_UGent_NL_RGB_2400_kleur_witbg.png';
-import uantwerpenLogo from 'figma:asset/1cb2ac71f09b11e719653dac260438a910c5bd79.png';
+import ugentLogo from '@/assets/ugent-logo-new.png';
+import uantwerpenLogo from '@/assets/uantwerpen-logo-new.png';
+import imecLogo from '@/assets/ccb6f66f4bcef309f545c7e1cd0253900f6ea7f4.png';
+import vlaioLogo from '@/assets/vlaio-logo.png';
+import heroBg from '@/assets/hero-bg.png';
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800"></div>
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/20"></div>
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text content */}
-          <div className="text-white space-y-6">
-            <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm">
-              TETRA project
-            </div>
-
-            <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-              AI Powered Product Design
-            </h1>
-
-            <p className="text-lg text-blue-50 leading-relaxed">
-              De snelle opkomst van generatieve en agentic AI verandert fundamenteel hoe producten en diensten worden bedacht, ontworpen en verbeterd. Dit TETRA-project vertaalt complexe technologieën naar concrete toepassingen voor het New Product Development (NPD) proces.
-            </p>
-
-            <p className="text-lg text-blue-100 leading-relaxed">
-              Neem deel als bedrijf en ontdek de toekomst van product design
-            </p>
-
-            <div className="pt-4">
-              <a
-                href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl group"
-              >
-                <span className="text-lg font-semibold">Neem deel aan het project</span>
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-
-            {/* Partner logos */}
-            <div className="pt-6">
-              <p className="text-sm text-blue-100 mb-3">Een samenwerking tussen:</p>
-              <div className="flex flex-wrap items-center gap-6">
-                <div className="bg-white/95 backdrop-blur-sm px-4 py-3 rounded-lg">
-                  <img
-                    src={uantwerpenLogo}
-                    alt="Universiteit Antwerpen"
-                    className="h-10 object-contain"
-                  />
-                </div>
-                <div className="bg-white/95 backdrop-blur-sm px-4 py-3 rounded-lg">
-                  <img
-                    src={ugentLogo}
-                    alt="Universiteit Gent"
-                    className="h-10 object-contain"
-                  />
-                </div>
-              </div>
-              <p className="text-xs text-blue-100/80 mt-3">
-                Universiteit Antwerpen – Productontwikkeling & Universiteit Gent – Industrieel Ontwerpen
-              </p>
-            </div>
-          </div>
-
-          {/* Image */}
-          <div className="relative">
-            {/* Main hero image */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
-              <img
-                src={heroImage}
-                alt="AI Powered Product Design - Generative Workflows and Intelligent Modelling"
-                className="w-full h-[450px] object-cover"
+    <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-[#0A0F1E]">
+      {/* SVG liquid filter */}
+      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
+        <defs>
+          <filter id="liquid-filter" x="-12%" y="-12%" width="124%" height="124%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="turbulence" baseFrequency="0.007 0.005" numOctaves="5" seed="7" result="noise">
+              <animate
+                attributeName="baseFrequency"
+                values="0.007 0.005; 0.012 0.009; 0.006 0.011; 0.010 0.006; 0.007 0.005"
+                dur="28s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
               />
-            </div>
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="70" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
 
-            {/* Additional illustrative images - in front of main image */}
-            <div className="absolute -bottom-12 -left-12 w-48 h-48 rounded-xl overflow-hidden shadow-xl border-3 border-white/30 transform rotate-6 hover:rotate-0 transition-transform duration-300 hidden lg:block z-20">
-              <img
-                src={sketchingImage}
-                alt="Product design sketching on digital tablet"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="absolute -top-8 -right-8 w-40 h-40 rounded-xl overflow-hidden shadow-xl border-3 border-white/30 transform -rotate-12 hover:rotate-0 transition-transform duration-300 hidden lg:block z-20">
-              <img
-                src={cadModelingImage}
-                alt="3D CAD modeling software"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="absolute bottom-20 -right-16 w-44 h-44 rounded-xl overflow-hidden shadow-xl border-3 border-white/30 transform rotate-3 hover:rotate-0 transition-transform duration-300 hidden lg:block z-20">
-              <img
-                src={brainstormingImage}
-                alt="Brainstorming with post-it notes"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Decorative elements */}
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-r from-purple-500/30 to-blue-500/30 blur-3xl rounded-full"></div>
-          </div>
-        </div>
+      {/* Animated background — no bottom fade on the hero viewport */}
+      <div className="absolute inset-0 overflow-hidden">
+        <img
+          src={heroBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover animate-liquid-drift"
+          style={{ transformOrigin: 'center center', filter: 'url(#liquid-filter)' }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 70% 80% at 30% 50%, transparent 0%, rgba(5,10,25,0.35) 60%, rgba(5,10,25,0.75) 100%)',
+          }}
+        />
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-3 bg-white/50 rounded-full animate-bounce"></div>
+      <div className="relative z-10 flex-1 flex flex-col max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 pb-10">
+
+        {/* Top: VLAIO label */}
+        <div className="flex items-center gap-3 mt-6 hero-anim-1">
+          <span className="text-xs text-white/65 font-mono tracking-widest">TETRA PROJECT · ONDERSTEUND DOOR</span>
+          <img src={vlaioLogo} alt="VLAIO" className="h-3.5 object-contain" style={{ filter: 'brightness(0) invert(1)', opacity: 0.4 }} />
         </div>
+
+        {/* Middle: heading + description + CTAs */}
+        <div className="flex-1 flex flex-col justify-center max-w-4xl py-12">
+
+          {/* Main heading + subtitle */}
+          <div className="mb-8">
+            <div className="overflow-hidden pb-1 mb-1">
+              <div
+                className="font-black text-white leading-[1.0] tracking-tight hero-slide-1"
+                style={{ fontFamily: "'Dyson Sans Modern', sans-serif", fontSize: 'clamp(2.2rem, 5.5vw, 4rem)' }}
+              >
+                van data naar design:
+              </div>
+            </div>
+            <div className="overflow-hidden">
+              <div
+                className="font-medium tracking-tight hero-slide-2"
+                style={{ fontFamily: "'Dyson Sans Modern', sans-serif", fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', color: 'rgba(255,255,255,0.55)' }}
+              >
+                AI voor productontwikkeling van de toekomst.
+              </div>
+            </div>
+          </div>
+
+          {/* Description */}
+          <p className="text-sm text-white/75 max-w-lg leading-relaxed mb-10 hero-anim-3">
+            Generatieve en agentic AI verandert fundamenteel hoe producten worden bedacht en ontworpen. Dit TETRA-project van UAntwerpen en UGent vertaalt AI naar concrete toepassingen voor het NPD-proces.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-wrap items-center gap-3 hero-anim-4">
+            <a
+              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#1D1D1F] rounded-full font-semibold hover:bg-white/90 transition-colors group text-sm"
+            >
+              Neem deel aan het project
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a
+              href="#about"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white/80 hover:text-white hover:border-white/45 rounded-full font-semibold transition-colors text-sm"
+            >
+              Meer info
+            </a>
+          </div>
+        </div>
+
+        {/* Bottom: partner logos */}
+        <div className="hero-anim-5 mb-2">
+          <p className="text-xs text-white/55 font-mono tracking-widest mb-4">EEN SAMENWERKING TUSSEN</p>
+          <div className="flex flex-wrap items-center">
+            <img src={uantwerpenLogo} alt="Universiteit Antwerpen" className="h-7 object-contain" style={{ opacity: 0.8 }} />
+            <div className="w-px h-4 bg-white/20 mx-5 flex-shrink-0" />
+            <img src={ugentLogo} alt="Universiteit Gent" className="h-7 object-contain" style={{ opacity: 0.8 }} />
+            <div className="w-px h-4 bg-white/20 mx-5 flex-shrink-0" />
+            <img src={imecLogo} alt="Imec" className="h-6 object-contain" style={{ filter: 'brightness(0) invert(1)', opacity: 0.8 }} />
+            <div className="w-px h-4 bg-white/20 mx-5 flex-shrink-0" />
+            <img src={vlaioLogo} alt="VLAIO" className="h-5 object-contain" style={{ filter: 'brightness(0) invert(1)', opacity: 0.7 }} />
+          </div>
+        </div>
+
+      </div>
+
+      {/* Scroll indicator — bottom left: dot · line · dot */}
+      <div className="absolute bottom-8 left-8 z-10 hero-anim-6 flex flex-col items-center gap-1">
+        <div className="w-1 h-1 rounded-full bg-white/50" />
+        <div className="w-px h-8 bg-white/20 rounded-full overflow-hidden">
+          <div className="w-full bg-white/60 rounded-full animate-scroll-bounce" style={{ height: '40%' }} />
+        </div>
+        <div className="w-1 h-1 rounded-full bg-white/20" />
       </div>
     </section>
   );

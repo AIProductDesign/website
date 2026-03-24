@@ -1,21 +1,137 @@
+import { useEffect, useRef, Component, ReactNode } from 'react';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Questions } from './components/Questions';
 import { Participation } from './components/Participation';
 import { Mapping } from './components/Mapping';
+import { CaseStudies } from './components/CaseStudies';
 import { Contact } from './components/Contact';
 import { Navigation } from './components/Navigation';
+import { PartnerCarousel } from './components/PartnerCarousel';
+import { useReveal } from './hooks/useReveal';
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex items-center justify-center py-20 text-[#1D1D1F]/30 text-sm font-mono">
+          Deze sectie kon niet geladen worden.
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 export default function App() {
+  useReveal();
+
+  // Scroll progress bar + cursor kleur op hero
+  const progressRef = useRef<HTMLDivElement>(null);
+  const dotRef2 = useRef<HTMLDivElement>(null);
+  const ringRef2 = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const bar = progressRef.current;
+    const onScroll = () => {
+      if (bar) {
+        const total = document.body.scrollHeight - window.innerHeight;
+        bar.style.width = `${total > 0 ? (window.scrollY / total) * 100 : 0}%`;
+      }
+      // Wit op hero, donker daarna
+      const onHero = window.scrollY < window.innerHeight * 0.85;
+      if (dotRef2.current) dotRef2.current.style.background = onHero ? '#ffffff' : '#1D1D1F';
+      if (ringRef2.current) ringRef2.current.style.borderColor = onHero ? 'rgba(255,255,255,0.5)' : 'rgba(29,29,31,0.45)';
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Custom cursor — alleen op pointer-devices, transform i.p.v. top/left
+  const dotRef = dotRef2;
+  const ringRef = ringRef2;
+  const mouse = useRef({ x: -100, y: -100 });
+  const ring = useRef({ x: -100, y: -100 });
+  // dotRef2/ringRef2 worden ook gebruikt voor kleurwisseling via scroll
+
+  useEffect(() => {
+    // Niet renderen op touch-devices
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
+    const dot = dotRef.current;
+    const ringEl = ringRef.current;
+    if (!dot || !ringEl) return;
+
+    // Cursor zichtbaar maken
+    dot.style.opacity = '1';
+    ringEl.style.opacity = '1';
+
+    const onMove = (e: MouseEvent) => {
+      mouse.current = { x: e.clientX, y: e.clientY };
+    };
+
+    let rafId: number;
+    const animate = () => {
+      if (!document.hidden) {
+        ring.current.x += (mouse.current.x - ring.current.x) * 0.1;
+        ring.current.y += (mouse.current.y - ring.current.y) * 0.1;
+        dot.style.transform = `translate(calc(${mouse.current.x}px - 50%), calc(${mouse.current.y}px - 50%))`;
+        ringEl.style.transform = `translate(calc(${ring.current.x}px - 50%), calc(${ring.current.y}px - 50%))`;
+      }
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as Element).closest('a, button')) {
+        ringEl.classList.add('is-hovering');
+      } else {
+        ringEl.classList.remove('is-hovering');
+      }
+    };
+
+    window.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseover', onOver);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseover', onOver);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Grain overlay */}
+      <div className="grain-overlay" aria-hidden="true" />
+
+      {/* Scroll progress bar */}
+      <div
+        ref={progressRef}
+        className="fixed top-0 left-0 h-[5px] bg-[#4B9FFF] z-[9999] pointer-events-none"
+        style={{ width: '0%', boxShadow: '0 0 14px rgba(75,159,255,0.8)' }}
+      />
+
+      {/* Custom cursor — verborgen tot pointer-device bevestigd */}
+      <div ref={dotRef} className="cursor-dot" aria-hidden="true" style={{ opacity: 0 }} />
+      <div ref={ringRef} className="cursor-ring" aria-hidden="true" style={{ opacity: 0 }} />
+
       <Navigation />
-      <Hero />
-      <About />
-      <Questions />
-      <Participation />
-      <Mapping />
-      <Contact />
+      <ErrorBoundary><Hero /></ErrorBoundary>
+      <ErrorBoundary><PartnerCarousel /></ErrorBoundary>
+      <ErrorBoundary><About /></ErrorBoundary>
+      <ErrorBoundary><Questions /></ErrorBoundary>
+      <ErrorBoundary><Mapping /></ErrorBoundary>
+      <ErrorBoundary><CaseStudies /></ErrorBoundary>
+      <ErrorBoundary><Participation /></ErrorBoundary>
+      <ErrorBoundary><Contact /></ErrorBoundary>
     </div>
   );
 }
