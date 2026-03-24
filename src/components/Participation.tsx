@@ -25,7 +25,7 @@ const targets = [
 export function Participation() {
   return (
     <section id="participate" className="bg-white pt-4 pb-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12">
         <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-6">05 / DEELNEMEN</p>
         <div className="reveal-line h-px bg-black/8 mb-16" />
 

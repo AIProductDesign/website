@@ -112,7 +112,7 @@ export function Mapping() {
 
   return (
     <section id="mapping" className="bg-white pt-4 pb-32" ref={sectionRef}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12">
         <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-6">03 / NPD-PROCES</p>
         <div className="h-px bg-black/8 mb-14" />
 
@@ -244,7 +244,7 @@ export function Mapping() {
                         {p.num} / 07 · {p.label}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-black text-[#1D1D1F] tracking-tight leading-tight">
+                    <h3 className="text-4xl font-black text-[#1D1D1F] tracking-tight leading-tight">
                       {p.phase}
                     </h3>
                   </div>
@@ -269,7 +269,7 @@ export function Mapping() {
                   }}>
                     {/* Role */}
                     <p
-                      className="text-base text-[#1D1D1F] leading-relaxed mb-8 max-w-lg font-medium"
+                      className="text-lg text-[#1D1D1F] leading-relaxed mb-8 max-w-lg font-medium"
                       style={{
                         transform: isActive ? 'translateX(0)' : 'translateX(-10px)',
                         transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1)',

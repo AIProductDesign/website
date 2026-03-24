@@ -452,29 +452,29 @@ section[id] {
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  margin-left: -1rem;
-  margin-right: -1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width: 640px) {
   .section-label {
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .section-label {
-    margin-left: -2rem;
-    margin-right: -2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    margin-left: -3rem;
+    margin-right: -3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 }
 
