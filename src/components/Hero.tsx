@@ -3,45 +3,14 @@ import ugentLogo from '@/assets/ugent-logo-new.png';
 import uantwerpenLogo from '@/assets/uantwerpen-logo-new.png';
 import imecLogo from '@/assets/ccb6f66f4bcef309f545c7e1cd0253900f6ea7f4.png';
 import vlaioLogo from '@/assets/vlaio-logo.png';
-import heroBg from '@/assets/hero-bg.png';
+import { ParticleBackground } from './ParticleBackground';
 
 export function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-[#0A0F1E]">
-      {/* SVG liquid filter */}
-      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
-        <defs>
-          <filter id="liquid-filter" x="-12%" y="-12%" width="124%" height="124%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="turbulence" baseFrequency="0.007 0.005" numOctaves="5" seed="7" result="noise">
-              <animate
-                attributeName="baseFrequency"
-                values="0.007 0.005; 0.012 0.009; 0.006 0.011; 0.010 0.006; 0.007 0.005"
-                dur="28s"
-                repeatCount="indefinite"
-                calcMode="spline"
-                keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
-              />
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="70" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </defs>
-      </svg>
-
-      {/* Animated background — no bottom fade on the hero viewport */}
+      {/* Particle background */}
       <div className="absolute inset-0 overflow-hidden">
-        <img
-          src={heroBg}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover animate-liquid-drift"
-          style={{ transformOrigin: 'center center', filter: 'url(#liquid-filter)' }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse 70% 80% at 30% 50%, transparent 0%, rgba(5,10,25,0.35) 60%, rgba(5,10,25,0.75) 100%)',
-          }}
-        />
+        <ParticleBackground />
       </div>
 
       <div className="relative z-10 flex-1 flex flex-col max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 pb-10">

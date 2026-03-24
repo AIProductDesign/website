@@ -143,8 +143,8 @@ export function Mapping() {
             <div className="flex flex-row items-center mb-10">
               {phases.flatMap((p, i) => {
                 // each dot = slot i, each line = slot i + 0.5
-                const dotDelay = i * 0.5;
-                const lineDelay = i * 0.5 + 0.25;
+                const dotDelay = i * 0.07;
+                const lineDelay = i * 0.07 + 0.04;
                 const dotAnim = dotsVisible
                   ? { opacity: 1, transform: i === activeIdx ? 'translateX(0) scale(2)' : 'translateX(0) scale(1)' }
                   : { opacity: 0, transform: 'translateX(-8px) scale(1)' };
@@ -159,7 +159,7 @@ export function Mapping() {
                       boxShadow: i === activeIdx ? '0 0 0 3px rgba(75,159,255,0.15)' : 'none',
                       ...dotAnim,
                       transition: dotsVisible
-                        ? `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${dotDelay}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${dotDelay}s, background 0.5s, box-shadow 0.5s`
+                        ? `opacity 0.4s cubic-bezier(0.16,1,0.3,1) ${dotDelay}s, transform 0.4s cubic-bezier(0.16,1,0.3,1) ${dotDelay}s, background 0.5s, box-shadow 0.5s`
                         : 'none',
                     }}
                   />,
@@ -173,7 +173,7 @@ export function Mapping() {
                         height: '1px',
                         background: 'rgba(0,0,0,0.08)',
                         opacity: dotsVisible ? 1 : 0,
-                        transition: `opacity 0.6s ease ${lineDelay}s`,
+                        transition: `opacity 0.35s ease ${lineDelay}s`,
                       }}
                     >
                       <div

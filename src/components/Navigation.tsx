@@ -60,7 +60,7 @@ export function Navigation() {
               href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 ${ctaBg}`}
+              className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 ${ctaBg}`}
             >
               Neem deel
             </a>
