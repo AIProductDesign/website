@@ -5,25 +5,25 @@ const questions = [
     num: '01',
     text: 'Hoe kan AI productbeslissingen verbeteren in plaats van enkel analyses te leveren?',
     answer:
-      'AI kan beslissingen verbeteren door niet alleen inzichten te genereren, maar ook opties te vergelijken en consequenties zichtbaar te maken. De focus verschuift naar systemen die concrete keuzes ondersteunen : ontwerpvarianten, kostenimpact en risico\'s. Dit via predictive models, scenario-analyse en decision support tools geïntegreerd in het ontwikkelproces.',
+      'Binnen AIDN wordt AI benaderd als decision support i.p.v. analyse-tool, met focus op hoe inzichten effectief worden omgezet in concrete beslissingen binnen NPD.',
   },
   {
     num: '02',
     text: 'Hoe vertalen we data en evaluaties naar concrete ontwerpkeuzes en redesigns?',
     answer:
-      'Dit vereist een koppeling tussen analyse en actie. AI wordt verbonden met ontwerpomgevingen zoals CAD en simulatietools, zodat inzichten automatisch leiden tot aanpassingen. Parameters zoals materiaal, geometrie of modulariteit worden gewijzigd op basis van prestatiescores. Kern is een gesloten loop tussen evaluatie en redesign.',
+      'De kern ligt op het integreren van AI in workflows zodat evaluaties leiden tot concrete designalternatieven, trade-offs en redesigns, niet enkel inzichten.',
   },
   {
     num: '03',
     text: 'Waar creëert AI vandaag echte waarde in productontwikkeling en waar niet?',
     answer:
-      'AI creëert vandaag vooral waarde in drie domeinen: trendanalyse en ideation, voorspellingen in business cases, en optimalisatie in design en testing. Minder waardevol zijn generieke toepassingen zonder duidelijke use case of voldoende data. Succes hangt sterk af van context, datakwaliteit en integratie in bestaande processen.',
+      'AIDN behandelt dit via realistische cases: sterke impact in vroege fases (ideation, analyse), maar beperkingen bij validatie en besluitvorming.',
   },
   {
     num: '04',
     text: 'Hoe integreren we AI in bestaande ontwerp- en ontwikkelprocessen zonder extra complexiteit?',
     answer:
-      'AI moet ingebed worden in bestaande tools en workflows in plaats van ernaast te bestaan. Dit betekent integratie met systemen zoals CAD, PLM en data platforms. Kleine, gerichte toepassingen werken beter dan grote transformaties. Door AI stap voor stap te koppelen aan bestaande beslismomenten blijft de complexiteit beheersbaar.',
+      'De focus ligt op het herontwerpen van bestaande processen rond AI, zodat het naadloos integreert in NPD in plaats van extra tools en complexiteit toe te voegen.',
   },
 ];
 
