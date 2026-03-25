@@ -238,7 +238,7 @@ export function Mapping() {
                       pointerEvents: i === activeIdx ? 'auto' : 'none',
                     }}
                   >
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-4">
                       <Icon className="w-4 h-4 text-[#4B9FFF]" />
                       <span className="font-mono text-xs text-[#4B9FFF] tracking-widest">
                         {p.num} / 07 · {p.label}
