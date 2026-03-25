@@ -16,7 +16,7 @@ const phases = [
   {
     icon: Layers,
     num: '02',
-    phase: 'Conceptontwikkeling',
+    phase: 'Concept ontwikkeling',
     label: 'Validatie & varianten',
     role: 'Ondersteunen van conceptkeuzes en vroege validatie.',
     applications: ['Analyse van klantfeedback (surveys, interviews)', 'Voorspellen van klantacceptatie', 'Genereren en vergelijken van conceptvarianten'],
@@ -134,7 +134,7 @@ export function Mapping() {
         </div>
 
         {/* ─── Desktop: sticky left indicator + scrollable right details ─── */}
-        <div className="hidden lg:grid lg:grid-cols-[300px_1fr] lg:gap-32">
+        <div className="hidden lg:grid lg:grid-cols-[300px_1fr] lg:gap-20">
 
           {/* Left: sticky progress indicator */}
           <div className="sticky top-24 self-start">
