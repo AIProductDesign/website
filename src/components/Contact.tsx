@@ -60,18 +60,13 @@ export function Contact() {
           <p className="text-xs font-mono text-[#1D1D1F]/70 tracking-widest mb-8">ONDERZOEKSPARTNERS</p>
           <div className="flex flex-wrap items-center justify-between gap-6 w-full">
             {partners.map((p) => (
-              <div key={p.name} className="flex items-center gap-3">
-                <img
-                  src={p.logo}
-                  alt={p.name}
-                  className="h-8 object-contain"
-                  style={p.white ? { filter: 'brightness(0)', opacity: 0.65 } : { mixBlendMode: 'multiply', opacity: 0.8 }}
-                />
-                <div>
-                  <p className="text-sm font-semibold text-[#1D1D1F]">{p.name}</p>
-                  <p className="text-xs text-[#1D1D1F]/75 font-mono">{p.dept}</p>
-                </div>
-              </div>
+              <img
+                key={p.name}
+                src={p.logo}
+                alt={p.name}
+                className="h-8 object-contain"
+                style={p.white ? { filter: 'brightness(0)', opacity: 0.65 } : { mixBlendMode: 'multiply', opacity: 0.8 }}
+              />
             ))}
           </div>
         </div>
