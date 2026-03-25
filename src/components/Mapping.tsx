@@ -134,7 +134,7 @@ export function Mapping() {
         </div>
 
         {/* ─── Desktop: sticky left indicator + scrollable right details ─── */}
-        <div className="hidden lg:grid lg:grid-cols-[300px_1fr] lg:gap-20">
+        <div className="hidden lg:grid lg:grid-cols-[300px_1fr] lg:gap-32">
 
           {/* Left: sticky progress indicator */}
           <div className="sticky top-24 self-start">
