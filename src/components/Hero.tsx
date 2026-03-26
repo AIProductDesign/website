@@ -25,10 +25,19 @@ export function Hero() {
             </feTurbulence>
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="70" xChannelSelector="R" yChannelSelector="G" />
           </filter>
-          {/* Mobile: lichtere versie — numOctaves 2, geen geanimeerde baseFrequency */}
-          <filter id="liquid-filter-mobile" x="-8%" y="-8%" width="116%" height="116%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="turbulence" baseFrequency="0.009 0.007" numOctaves="2" seed="7" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
+          {/* Mobile: lichtere versie — numOctaves 3, trage baseFrequency animatie */}
+          <filter id="liquid-filter-mobile" x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="turbulence" baseFrequency="0.009 0.007" numOctaves="3" seed="7" result="noise">
+              <animate
+                attributeName="baseFrequency"
+                values="0.009 0.007; 0.013 0.010; 0.008 0.012; 0.009 0.007"
+                dur="18s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+              />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="55" xChannelSelector="R" yChannelSelector="G" />
           </filter>
         </defs>
       </svg>
