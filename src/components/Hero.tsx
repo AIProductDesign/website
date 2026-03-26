@@ -11,6 +11,7 @@ export function Hero() {
       {/* SVG liquid filter */}
       <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
         <defs>
+          {/* Desktop: full quality */}
           <filter id="liquid-filter" x="-12%" y="-12%" width="124%" height="124%" colorInterpolationFilters="sRGB">
             <feTurbulence type="turbulence" baseFrequency="0.007 0.005" numOctaves="5" seed="7" result="noise">
               <animate
@@ -23,6 +24,11 @@ export function Hero() {
               />
             </feTurbulence>
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="70" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+          {/* Mobile: lichtere versie — numOctaves 2, geen geanimeerde baseFrequency */}
+          <filter id="liquid-filter-mobile" x="-8%" y="-8%" width="116%" height="116%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="turbulence" baseFrequency="0.009 0.007" numOctaves="2" seed="7" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
           </filter>
         </defs>
       </svg>
