@@ -466,9 +466,9 @@ export function Mapping() {
                       pointerEvents: i === mobileActiveIdx ? 'auto' : 'none',
                     }}
                   >
-                    <div className="flex items-center gap-2 mb-1">
-                      <Icon className="w-3.5 h-3.5 text-[#4B9FFF]" />
-                      <span className="font-mono text-xs text-[#4B9FFF] tracking-widest">
+                    <div className="flex items-center gap-2 mb-1 min-w-0">
+                      <Icon className="w-3.5 h-3.5 text-[#4B9FFF] flex-shrink-0" />
+                      <span className="font-mono text-xs text-[#4B9FFF] tracking-widest truncate">
                         {p.num} / 07 · {p.label}
                       </span>
                     </div>
