@@ -474,7 +474,7 @@ export function Mapping() {
                     <div className="flex items-center gap-2 mb-1 min-w-0">
                       <Icon className="w-3.5 h-3.5 text-[#4B9FFF] flex-shrink-0" />
                       <span className="font-mono text-xs text-[#4B9FFF] tracking-widest truncate">
-                        {p.num} / 07 · {p.label}
+                        {p.num} / 07 · {mobileTitle(p.label)}
                       </span>
                     </div>
                     <h3 className="text-base font-black text-[#1D1D1F] tracking-tight leading-tight">
