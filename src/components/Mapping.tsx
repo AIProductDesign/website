@@ -75,6 +75,11 @@ const phases = [
   },
 ];
 
+function mobileTitle(phase: string) {
+  const idx = phase.indexOf(' & ');
+  return idx !== -1 ? phase.slice(0, idx) : phase;
+}
+
 export function Mapping() {
   const [activeIdx, setActiveIdx] = useState(0);
   const [dotsVisible, setDotsVisible] = useState(false);
@@ -396,7 +401,7 @@ export function Mapping() {
           <div className="sticky top-14 z-40 bg-white pt-3 pb-3 border-b border-black/6">
 
             {/* Progress dots */}
-            <div className="flex flex-row items-center mb-2">
+            <div className="flex flex-row items-center mb-4">
               {phases.flatMap((p, i) => {
                 const dotDelay = i * 0.07;
                 const lineDelay = i * 0.07 + 0.04;
@@ -473,7 +478,7 @@ export function Mapping() {
                       </span>
                     </div>
                     <h3 className="text-base font-black text-[#1D1D1F] tracking-tight leading-tight">
-                      {p.phase}
+                      {mobileTitle(p.phase)}
                     </h3>
                   </div>
                 );
