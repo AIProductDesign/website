@@ -488,8 +488,8 @@ export function Mapping() {
               <div
                 key={p.num}
                 ref={(el) => { mobileTriggerRefs.current[i] = el; }}
-                className="py-10 border-b border-black/5 last:border-0"
-                style={{ scrollMarginTop: '160px' }}
+                className="py-10 flex flex-col justify-center"
+                style={{ minHeight: 'calc(100vh - 140px)', scrollMarginTop: '160px' }}
               >
                 <div className="w-full" style={{
                   opacity: isActive ? 1 : 0.28,
