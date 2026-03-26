@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useIsMobile } from '@/components/ui/use-mobile';
 import img0 from '@/assets/0e898025dbbc194ef5efbfbd10b577355e4d6195.png';
 import img1 from '@/assets/1d9145f42e5cfc266e49a88615bff6b306221383.png';
 
@@ -108,6 +109,7 @@ const caseStudies = [
 ];
 
 const INITIAL_COUNT = 6;
+const MOBILE_INITIAL_COUNT = 3;
 
 type CaseEntry = typeof caseStudies[0];
 
@@ -155,8 +157,10 @@ function CaseCard({ cs, num }: { cs: CaseEntry; num: number }) {
 }
 
 export function CaseStudies() {
+  const isMobile = useIsMobile();
+  const initialCount = isMobile ? MOBILE_INITIAL_COUNT : INITIAL_COUNT;
   const [showAll, setShowAll] = useState(false);
-  const count = showAll ? caseStudies.length : INITIAL_COUNT;
+  const count = showAll ? caseStudies.length : initialCount;
 
   return (
     <section id="case-studies" className="bg-white pt-4 pb-32">
@@ -179,13 +183,13 @@ export function CaseStudies() {
           ))}
         </div>
 
-        {!showAll && caseStudies.length > INITIAL_COUNT && (
+        {!showAll && caseStudies.length > initialCount && (
           <div className="mt-8 flex justify-center">
             <button
               onClick={() => setShowAll(true)}
               className="px-7 py-3 border border-black/12 text-[#1D1D1F]/70 hover:text-[#1D1D1F] hover:border-black/25 rounded-full text-sm font-medium transition-colors"
             >
-              Laad meer ({caseStudies.length - INITIAL_COUNT} cases)
+              Laad meer ({caseStudies.length - initialCount} cases)
             </button>
           </div>
         )}

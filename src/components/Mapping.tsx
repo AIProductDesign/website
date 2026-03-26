@@ -363,7 +363,7 @@ export function Mapping() {
             return (
               <div
                 key={p.num}
-                className="card-hover bg-[#F5F5F7] border border-black/6 rounded-2xl p-6 group"
+                className="reveal card-hover bg-[#F5F5F7] border border-black/6 rounded-2xl p-6 group"
               >
                 <div className="flex items-start justify-between mb-3">
                   <span className="font-mono text-xs text-[#1D1D1F]/75 tracking-widest">{p.num}</span>
