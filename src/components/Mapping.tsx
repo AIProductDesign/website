@@ -80,6 +80,8 @@ export function Mapping() {
   const [dotsVisible, setDotsVisible] = useState(false);
   const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  const mobileCardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const sectionObs = new IntersectionObserver(
@@ -104,6 +106,24 @@ export function Mapping() {
         { rootMargin: '-35% 0px -35% 0px', threshold: 0 }
       );
       const el = triggerRefs.current[i];
+      if (el) obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  useEffect(() => {
+    const observers = phases.map((_, i) => {
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) => new Set(prev).add(i));
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.15 }
+      );
+      const el = mobileCardRefs.current[i];
       if (el) obs.observe(el);
       return obs;
     });
@@ -356,31 +376,136 @@ export function Mapping() {
           </div>
         </div>
 
-        {/* ─── Mobile: stacked cards ─── */}
-        <div className="lg:hidden grid gap-3">
-          {phases.map((p) => {
+        {/* ─── Mobile: animated cards ─── */}
+        <div className="lg:hidden grid gap-6">
+          {phases.map((p, i) => {
             const Icon = p.icon;
+            const isVisible = visibleCards.has(i);
             return (
               <div
                 key={p.num}
-                className="reveal card-hover bg-[#F5F5F7] border border-black/6 rounded-2xl p-6 group"
+                ref={(el) => { mobileCardRefs.current[i] = el; }}
+                className="bg-[#F5F5F7] border border-black/6 rounded-2xl p-6"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+                  transition: 'opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1)',
+                }}
               >
-                <div className="flex items-start justify-between mb-3">
-                  <span className="font-mono text-xs text-[#1D1D1F]/75 tracking-widest">{p.num}</span>
-                  <Icon className="w-4 h-4 text-[#1D1D1F]/75 group-hover:text-[#4B9FFF] transition-colors duration-300" />
+                {/* Header */}
+                <div className="flex items-center gap-2 mb-4"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+                    transition: `opacity 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.05 : 0}s, transform 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.05 : 0}s`,
+                  }}
+                >
+                  <Icon className="w-4 h-4 text-[#4B9FFF]" />
+                  <span className="font-mono text-xs text-[#4B9FFF] tracking-widest">{p.num} / 07 · {p.label}</span>
                 </div>
-                <h3 className="text-base font-bold text-[#1D1D1F] mb-0.5 tracking-tight">{p.phase}</h3>
-                <p className="text-xs text-[#4B9FFF] font-mono mb-3">{p.label}</p>
-                <p className="text-sm text-[#4A4A4F] leading-relaxed mb-4">{p.role}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {p.tools.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 bg-white border border-black/8 text-[#1D1D1F]/75 rounded-full text-xs font-mono"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                <h3
+                  className="text-2xl font-black text-[#1D1D1F] tracking-tight leading-tight mb-4"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+                    transition: `opacity 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.09 : 0}s, transform 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.09 : 0}s`,
+                  }}
+                >
+                  {p.phase}
+                </h3>
+
+                {/* Role */}
+                <p
+                  className="text-sm text-[#1D1D1F] leading-relaxed mb-6 font-medium"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+                    transition: `opacity 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.13 : 0}s, transform 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.13 : 0}s`,
+                  }}
+                >
+                  {p.role}
+                </p>
+
+                {/* Applications */}
+                <div className="mb-6">
+                  <p
+                    className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-3"
+                    style={{
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateY(0)' : 'translateY(6px)',
+                      transition: `opacity 0.4s ease ${isVisible ? 0.17 : 0}s, transform 0.4s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.17 : 0}s`,
+                    }}
+                  >
+                    TOEPASSINGEN
+                  </p>
+                  <ul className="space-y-2">
+                    {p.applications.map((a, ai) => (
+                      <li
+                        key={a}
+                        className="flex items-start gap-3"
+                        style={{
+                          opacity: isVisible ? 1 : 0,
+                          transform: isVisible ? 'translateY(0)' : 'translateY(10px)',
+                          transition: `opacity 0.45s ease ${isVisible ? 0.2 + ai * 0.08 : 0}s, transform 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.2 + ai * 0.08 : 0}s`,
+                        }}
+                      >
+                        <span className="text-[#4B9FFF] flex-shrink-0 mt-0.5 text-xs font-bold leading-5">→</span>
+                        <span className="text-sm text-[#1D1D1F]/85 leading-relaxed">{a}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Tools */}
+                <div
+                  className="mb-6"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+                    transition: `opacity 0.45s ease ${isVisible ? 0.38 : 0}s, transform 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.38 : 0}s`,
+                  }}
+                >
+                  <p className="text-xs font-mono text-[#1D1D1F]/75 tracking-widest mb-3">TOOLS</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.tools.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-1 bg-white border border-black/8 text-[#1D1D1F]/75 rounded-full text-xs font-mono"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Pitfalls */}
+                <div>
+                  <p
+                    className="text-xs font-mono text-[#1D1D1F]/75 tracking-widest mb-3"
+                    style={{
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateY(0)' : 'translateY(6px)',
+                      transition: `opacity 0.4s ease ${isVisible ? 0.44 : 0}s, transform 0.4s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.44 : 0}s`,
+                    }}
+                  >
+                    VALKUILEN
+                  </p>
+                  <ul className="space-y-2">
+                    {p.pitfalls.map((v, vi) => (
+                      <li
+                        key={v}
+                        className="flex items-start gap-2.5 text-sm text-[#1D1D1F]/75"
+                        style={{
+                          opacity: isVisible ? 1 : 0,
+                          transform: isVisible ? 'translateY(0)' : 'translateY(10px)',
+                          transition: `opacity 0.45s ease ${isVisible ? 0.47 + vi * 0.08 : 0}s, transform 0.45s cubic-bezier(0.16,1,0.3,1) ${isVisible ? 0.47 + vi * 0.08 : 0}s`,
+                        }}
+                      >
+                        <span className="text-amber-400/70 flex-shrink-0 mt-0.5 text-xs font-bold leading-5">!</span>
+                        {v}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             );
