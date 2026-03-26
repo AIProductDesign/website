@@ -33,7 +33,7 @@ export function Hero() {
           src={heroBg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover animate-liquid-drift"
+          className="absolute inset-0 w-full h-full object-cover animate-liquid-drift hero-liquid-filter"
           style={{ transformOrigin: 'center center', filter: 'url(#liquid-filter)' }}
         />
         <div
