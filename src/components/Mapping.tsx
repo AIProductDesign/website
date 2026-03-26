@@ -393,7 +393,7 @@ export function Mapping() {
         <div className="lg:hidden" ref={mobileSectionRef}>
 
           {/* Sticky top indicator */}
-          <div className="sticky top-16 z-10 bg-white/95 backdrop-blur-sm pt-4 pb-5 -mx-6 px-6 sm:-mx-10 sm:px-10">
+          <div className="sticky top-14 z-40 bg-white pt-4 pb-5 border-b border-black/6">
 
             {/* Progress dots */}
             <div className="flex flex-row items-center mb-4">
