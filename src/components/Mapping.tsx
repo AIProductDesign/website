@@ -393,10 +393,10 @@ export function Mapping() {
         <div className="lg:hidden" ref={mobileSectionRef}>
 
           {/* Sticky top indicator */}
-          <div className="sticky top-14 z-40 bg-white pt-4 pb-5 border-b border-black/6">
+          <div className="sticky top-14 z-40 bg-white pt-3 pb-3 border-b border-black/6">
 
             {/* Progress dots */}
-            <div className="flex flex-row items-center mb-4">
+            <div className="flex flex-row items-center mb-2">
               {phases.flatMap((p, i) => {
                 const dotDelay = i * 0.07;
                 const lineDelay = i * 0.07 + 0.04;
@@ -448,7 +448,7 @@ export function Mapping() {
             </div>
 
             {/* Phase name + icon — slides directionally */}
-            <div style={{ position: 'relative', height: '3rem', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', height: '2.6rem', overflow: 'hidden' }}>
               {phases.map((p, i) => {
                 const Icon = p.icon;
                 const dir = i < mobileActiveIdx ? -1 : 1;
@@ -472,7 +472,7 @@ export function Mapping() {
                         {p.num} / 07 · {p.label}
                       </span>
                     </div>
-                    <h3 className="text-xl font-black text-[#1D1D1F] tracking-tight leading-tight">
+                    <h3 className="text-base font-black text-[#1D1D1F] tracking-tight leading-tight">
                       {p.phase}
                     </h3>
                   </div>
@@ -488,7 +488,8 @@ export function Mapping() {
               <div
                 key={p.num}
                 ref={(el) => { mobileTriggerRefs.current[i] = el; }}
-                className="min-h-[75vh] flex items-center py-12"
+                className="py-10 border-b border-black/5 last:border-0"
+                style={{ scrollMarginTop: '160px' }}
               >
                 <div className="w-full" style={{
                   opacity: isActive ? 1 : 0.28,
