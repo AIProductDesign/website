@@ -2,24 +2,25 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Send } from 'lucide-react';
 
 export function NewPostPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!content.trim()) return;
     setError('');
     setLoading(true);
 
+    const title = content.trim().split('\n')[0].slice(0, 80);
     const { error } = await supabase
       .from('posts')
-      .insert({ author_id: user!.id, title, content });
+      .insert({ author_id: user!.id, title, content: content.trim() });
 
     if (error) {
       setError('Fout: ' + error.message);
@@ -49,29 +50,14 @@ export function NewPostPage() {
 
         <div className="bg-white rounded-2xl border border-black/6 p-6 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="block text-xs font-medium text-[#1D1D1F]/60 mb-1.5">Titel</label>
-              <input
-                type="text"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-                required
-                placeholder="Waar gaat jouw bericht over?"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 bg-[#F5F5F7] text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/30 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/40 focus:border-[#4B9FFF] transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-[#1D1D1F]/60 mb-1.5">Bericht</label>
-              <textarea
-                value={content}
-                onChange={e => setContent(e.target.value)}
-                required
-                rows={8}
-                placeholder="Schrijf hier je bericht…"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 bg-[#F5F5F7] text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/30 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/40 focus:border-[#4B9FFF] transition resize-none"
-              />
-            </div>
+            <textarea
+              value={content}
+              onChange={e => setContent(e.target.value)}
+              required
+              rows={10}
+              placeholder="Schrijf hier je bericht…"
+              className="w-full px-3.5 py-3 rounded-xl border border-black/10 bg-[#F5F5F7] text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/30 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/40 focus:border-[#4B9FFF] transition resize-none leading-relaxed"
+            />
 
             {error && (
               <p className="text-xs text-red-500 bg-red-50 rounded-lg px-3 py-2">{error}</p>
@@ -80,9 +66,10 @@ export function NewPostPage() {
             <div className="flex gap-3 pt-1">
               <button
                 type="submit"
-                disabled={loading}
-                className="px-6 py-2.5 bg-[#1D1D1F] text-white text-sm font-semibold rounded-xl hover:bg-[#1D1D1F]/80 transition disabled:opacity-50"
+                disabled={loading || !content.trim()}
+                className="flex items-center gap-2 px-6 py-2.5 bg-[#1D1D1F] text-white text-sm font-semibold rounded-xl hover:bg-[#1D1D1F]/80 transition disabled:opacity-40"
               >
+                <Send className="w-3.5 h-3.5" />
                 {loading ? 'Plaatsen…' : 'Bericht plaatsen'}
               </button>
               <Link

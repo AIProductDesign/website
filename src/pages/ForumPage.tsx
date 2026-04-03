@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { supabase, Post } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { avatarColor } from '../lib/avatarColor';
-import { PenLine, LogOut, Heart, MessageSquare, Send, ChevronRight } from 'lucide-react';
+import { DEMO_POST } from '../lib/demoPost';
+import { LogOut, Heart, MessageSquare, Send, ChevronRight } from 'lucide-react';
 
 type PostWithMeta = Post & {
   profiles?: { company_name: string };
@@ -18,6 +19,7 @@ export function ForumPage() {
   const [loading, setLoading] = useState(true);
   const [quickText, setQuickText] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [demoLiked, setDemoLiked] = useState(false);
 
   const fetchPosts = async () => {
     const { data } = await supabase
@@ -78,6 +80,8 @@ export function ForumPage() {
     return d.toLocaleDateString('nl-BE', { day: 'numeric', month: 'short' });
   };
 
+  const demoLikes = DEMO_POST.likes + (demoLiked ? 1 : 0);
+
   return (
     <div className="min-h-screen bg-[#F5F5F7]">
       <div className="grain-overlay" aria-hidden="true" />
@@ -89,7 +93,7 @@ export function ForumPage() {
             <a href="/" className="tracking-widest font-bold text-[#1D1D1F]" style={{ fontSize: '1.05rem', fontFamily: "'Dyson Sans Modern', sans-serif" }}>
               aipec
             </a>
-            <span className="hidden sm:block text-xs font-mono text-[#1D1D1F]/25 tracking-widest">BEDRIJVENPLATFORM</span>
+            <span className="hidden sm:block text-xs font-mono text-[#1D1D1F]/25 tracking-widest">BEDRIJVENFORUM</span>
           </div>
           <div className="flex items-center gap-3">
             {profile && (
@@ -112,20 +116,15 @@ export function ForumPage() {
         {/* Page title */}
         <div className="pt-8 pb-10">
           <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-4">02 / BEDRIJVENFORUM</p>
-          <div>
-            <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Kennis delen</h1>
-            <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/20 leading-[1.05] tracking-tight">samen groeien.</p>
-          </div>
+          <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Kennis delen</h1>
+          <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/20 leading-[1.05] tracking-tight">samen groeien.</p>
         </div>
 
         {/* Quick compose */}
         {profile && (
           <form onSubmit={handleQuickPost} className="bg-white rounded-2xl border border-black/6 p-4 mb-3 shadow-sm">
             <div className="flex gap-3">
-              <div className="w-7 h-7 rounded-full shrink-0 flex items-center justify-center mt-0.5"
-                style={{ background: avatarColor(profile.company_name) + '22', border: `1.5px solid ${avatarColor(profile.company_name)}40` }}>
-                <div className="w-2 h-2 rounded-full" style={{ background: avatarColor(profile.company_name) }} />
-              </div>
+              <div className="w-2 h-2 rounded-full shrink-0 mt-2" style={{ background: avatarColor(profile.company_name) }} />
               <div className="flex-1">
                 <textarea
                   value={quickText}
@@ -157,14 +156,37 @@ export function ForumPage() {
           </form>
         )}
 
-        {/* Posts */}
+        {/* Demo post — pinned */}
+        <Link
+          to="/forum/demo"
+          className="group bg-white rounded-2xl border border-black/6 p-5 hover:border-[#4B9FFF]/25 hover:shadow-sm transition-all block mb-2.5"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(DEMO_POST.company) }} />
+              <span className="text-xs font-medium text-[#1D1D1F]/60">{DEMO_POST.company}</span>
+            </div>
+            <span className="text-xs text-[#1D1D1F]/25 font-mono">{DEMO_POST.date}</span>
+          </div>
+          <p className="text-sm text-[#1D1D1F]/50 leading-relaxed line-clamp-3 mb-4">{DEMO_POST.content}</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={e => { e.preventDefault(); setDemoLiked(v => !v); }}
+                className={`flex items-center gap-1.5 text-xs transition-colors ${demoLiked ? 'text-[#EF4444]' : 'text-[#1D1D1F]/25 hover:text-[#EF4444]'}`}
+              >
+                <Heart className={`w-3.5 h-3.5 ${demoLiked ? 'fill-current' : ''}`} />
+                {demoLikes}
+              </button>
+            </div>
+            <ChevronRight className="w-3.5 h-3.5 text-[#1D1D1F]/15 group-hover:text-[#4B9FFF]/50 transition-colors" />
+          </div>
+        </Link>
+
+        {/* Real posts */}
         {loading ? (
           <div className="flex justify-center py-24">
             <div className="w-5 h-5 border-2 border-[#4B9FFF] border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : posts.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-black/6 py-16 text-center">
-            <p className="text-[#1D1D1F]/25 text-sm font-mono tracking-wide">Nog geen berichten — wees de eerste.</p>
           </div>
         ) : (
           <div className="flex flex-col gap-2.5">
@@ -177,25 +199,14 @@ export function ForumPage() {
                   to={`/forum/${post.id}`}
                   className="group bg-white rounded-2xl border border-black/6 p-5 hover:border-[#4B9FFF]/25 hover:shadow-sm transition-all block"
                 >
-                  {/* Header */}
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
-                        style={{ background: color + '18', border: `1.5px solid ${color}35` }}>
-                        <div className="w-2 h-2 rounded-full" style={{ background: color }} />
-                      </div>
+                      <div className="w-2 h-2 rounded-full shrink-0" style={{ background: color }} />
                       <span className="text-xs font-medium text-[#1D1D1F]/60">{company}</span>
                     </div>
                     <span className="text-xs text-[#1D1D1F]/25 font-mono">{formatDate(post.created_at)}</span>
                   </div>
-
-                  {/* Content */}
-                  <h2 className="text-[0.95rem] font-semibold text-[#1D1D1F] group-hover:text-[#4B9FFF] transition-colors leading-snug mb-1.5">
-                    {post.title}
-                  </h2>
-                  <p className="text-sm text-[#1D1D1F]/40 leading-relaxed line-clamp-2 mb-4">{post.content}</p>
-
-                  {/* Footer */}
+                  <p className="text-sm text-[#1D1D1F]/50 leading-relaxed line-clamp-3 mb-4">{post.content}</p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <button

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { supabase, Post, Reply } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { avatarColor } from '../lib/avatarColor';
+import { DEMO_POST } from '../lib/demoPost';
 import { ArrowLeft, Send, Heart, LogOut } from 'lucide-react';
 
 type PostWithMeta = Post & {
@@ -23,8 +24,12 @@ export function ForumPostPage() {
   const [replyContent, setReplyContent] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [demoLiked, setDemoLiked] = useState(false);
+
+  const isDemo = id === 'demo';
 
   useEffect(() => {
+    if (isDemo) { setLoading(false); return; }
     const fetchData = async () => {
       const [{ data: postData }, { data: repliesData }, { count: likeCount }, { data: myLike }] = await Promise.all([
         supabase.from('posts').select('*, profiles(company_name)').eq('id', id).single(),
@@ -65,12 +70,68 @@ export function ForumPostPage() {
   const formatDate = (iso: string) =>
     new Date(iso).toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' });
 
+  const Header = () => (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-black/6">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+        <a href="/" className="tracking-widest font-bold text-[#1D1D1F]" style={{ fontSize: '1.05rem', fontFamily: "'Dyson Sans Modern', sans-serif" }}>
+          aipec
+        </a>
+        <div className="flex items-center gap-3">
+          {profile && (
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(profile.company_name) }} />
+              <span className="hidden sm:block text-xs text-[#1D1D1F]/45">{profile.company_name}</span>
+            </div>
+          )}
+          <button onClick={signOut} className="text-xs text-[#1D1D1F]/35 hover:text-[#1D1D1F] transition flex items-center gap-1.5">
+            <LogOut className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Uitloggen</span>
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center bg-[#F5F5F7]">
       <div className="w-5 h-5 border-2 border-[#4B9FFF] border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
+  /* ── Demo post ── */
+  if (isDemo) {
+    const demoLikes = DEMO_POST.likes + (demoLiked ? 1 : 0);
+    return (
+      <div className="min-h-screen bg-[#F5F5F7]">
+        <div className="grain-overlay" aria-hidden="true" />
+        <Header />
+        <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-24 pb-20">
+          <Link to="/forum" className="inline-flex items-center gap-1.5 text-xs text-[#1D1D1F]/35 hover:text-[#1D1D1F] transition mb-10">
+            <ArrowLeft className="w-3.5 h-3.5" />
+            Terug naar forum
+          </Link>
+          <div className="bg-white rounded-2xl border border-black/6 p-6 sm:p-8 mb-4">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(DEMO_POST.company) }} />
+              <span className="text-xs font-semibold text-[#1D1D1F]">{DEMO_POST.company}</span>
+              <span className="text-[#1D1D1F]/15">·</span>
+              <span className="text-xs text-[#1D1D1F]/35">{DEMO_POST.date}</span>
+            </div>
+            <p className="text-sm text-[#4A4A4F] leading-relaxed whitespace-pre-wrap mb-6">{DEMO_POST.content}</p>
+            <button
+              onClick={() => setDemoLiked(v => !v)}
+              className={`flex items-center gap-1.5 text-xs transition ${demoLiked ? 'text-[#EF4444]' : 'text-[#1D1D1F]/30 hover:text-[#EF4444]'}`}
+            >
+              <Heart className={`w-3.5 h-3.5 ${demoLiked ? 'fill-current' : ''}`} />
+              {demoLikes} {demoLikes === 1 ? 'like' : 'likes'}
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  /* ── Real post not found ── */
   if (!post) return (
     <div className="min-h-screen flex items-center justify-center bg-[#F5F5F7] text-[#1D1D1F]/30 text-sm font-mono">
       Bericht niet gevonden.
@@ -82,28 +143,8 @@ export function ForumPostPage() {
   return (
     <div className="min-h-screen bg-[#F5F5F7]">
       <div className="grain-overlay" aria-hidden="true" />
-
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-black/6">
-        <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 h-14 flex items-center justify-between">
-          <a href="/" className="tracking-widest font-bold text-[#1D1D1F]" style={{ fontSize: '1.1rem', fontFamily: "'Dyson Sans Modern', sans-serif" }}>
-            aipec
-          </a>
-          <div className="flex items-center gap-4">
-            {profile && (
-              <div className="hidden sm:flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(profile.company_name) }} />
-                <span className="text-xs text-[#1D1D1F]/50">{profile.company_name}</span>
-              </div>
-            )}
-            <button onClick={signOut} className="flex items-center gap-1.5 text-xs text-[#1D1D1F]/40 hover:text-[#1D1D1F] transition">
-              <LogOut className="w-3.5 h-3.5" />
-              Uitloggen
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 pt-28 pb-20">
+      <Header />
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-24 pb-20">
         <Link to="/forum" className="inline-flex items-center gap-1.5 text-xs text-[#1D1D1F]/35 hover:text-[#1D1D1F] transition mb-10">
           <ArrowLeft className="w-3.5 h-3.5" />
           Terug naar forum
@@ -111,13 +152,12 @@ export function ForumPostPage() {
 
         {/* Post */}
         <div className="bg-white rounded-2xl border border-black/6 p-6 sm:p-8 mb-4">
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-5">
             <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(postCompany) }} />
             <span className="text-xs font-semibold text-[#1D1D1F]">{postCompany}</span>
             <span className="text-[#1D1D1F]/15">·</span>
             <span className="text-xs text-[#1D1D1F]/35">{formatDate(post.created_at)}</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#1D1D1F] leading-tight tracking-tight mb-4">{post.title}</h1>
           <p className="text-sm text-[#4A4A4F] leading-relaxed whitespace-pre-wrap mb-6">{post.content}</p>
           <button
             onClick={toggleLike}
@@ -132,7 +172,7 @@ export function ForumPostPage() {
         {replies.map((reply) => {
           const rc = (reply.profiles as any)?.company_name ?? 'Onbekend';
           return (
-            <div key={reply.id} className="bg-white rounded-2xl border border-black/6 p-5 sm:p-6 mb-3">
+            <div key={reply.id} className="bg-white rounded-2xl border border-black/6 p-5 mb-3">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(rc) }} />
                 <span className="text-xs font-semibold text-[#1D1D1F]">{rc}</span>
@@ -146,7 +186,7 @@ export function ForumPostPage() {
 
         {/* Reply form */}
         {profile && (
-          <div className="bg-white rounded-2xl border border-black/6 p-5 sm:p-6 mt-4">
+          <div className="bg-white rounded-2xl border border-black/6 p-5 mt-4">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(profile.company_name) }} />
               <span className="text-xs text-[#1D1D1F]/40">{profile.company_name}</span>

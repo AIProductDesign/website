@@ -1,5 +1,7 @@
-import { Zap, Map, Users, TrendingUp, ExternalLink, ArrowRight } from 'lucide-react';
+import { Zap, Map, Users, TrendingUp, ExternalLink, ArrowRight, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { avatarColor } from '../lib/avatarColor';
+import { DEMO_POST } from '../lib/demoPost';
 
 const focusPoints = [
   {
@@ -24,16 +26,7 @@ const focusPoints = [
   },
 ];
 
-const DEMO_POST = {
-  company: 'Cortex Industries',
-  date: '14 mrt',
-  title: 'AI geeft antwoorden, maar stelt niet de juiste vragen',
-  content: 'We werken nu zes maanden met generatieve AI in ons ontwerpproces. Het versnelt, dat klopt — maar ik merk dat mijn team minder diep nadenkt. De tool geeft altijd iets terug, en dat "iets" voelt al snel goed genoeg. Wie bewaakt nog het verschil tussen een snel antwoord en het juiste antwoord?',
-};
-
 export function About() {
-  const formatDate = (d: string) => d;
-
   return (
     <section id="about" className="bg-white pt-4 pb-24">
       <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12">
@@ -87,29 +80,33 @@ export function About() {
           })}
         </div>
 
-        {/* Bedrijvenplatform */}
+        {/* Bedrijvenforum */}
         <div className="reveal mt-14 pt-10 border-t border-black/6">
           <div className="flex items-end justify-between mb-8">
             <div>
               <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-3">02 / BEDRIJVENFORUM</p>
-              <h3 className="text-3xl sm:text-4xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Wat er leeft</h3>
-              <p className="text-3xl sm:text-4xl font-black text-[#1D1D1F]/25 leading-[1.05] tracking-tight">bij de deelnemers.</p>
+              <div className="reveal-heading">
+                <span className="text-3xl sm:text-4xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Wat er leeft</span>
+              </div>
+              <div className="reveal-heading" style={{ transitionDelay: '80ms' }}>
+                <span className="text-3xl sm:text-4xl font-black text-[#1D1D1F]/25 leading-[1.05] tracking-tight">bij de deelnemers.</span>
+              </div>
             </div>
-            <a href="/#/forum" className="hidden sm:inline-flex items-center gap-1.5 text-xs text-[#1D1D1F]/40 hover:text-[#1D1D1F] transition font-medium">
+            <Link to="/forum" className="hidden sm:inline-flex items-center gap-1.5 text-xs text-[#1D1D1F]/40 hover:text-[#1D1D1F] transition font-medium">
               Alle berichten
               <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            </Link>
           </div>
 
-          {/* Demo post — white card */}
-          <a
-            href="/#/forum"
+          {/* Demo post — read-only */}
+          <Link
+            to="/forum"
             className="block bg-white rounded-2xl border border-black/8 shadow-sm p-5 hover:border-[#4B9FFF]/30 hover:shadow-md transition group"
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(DEMO_POST.company) }} />
               <span className="text-xs font-medium text-[#1D1D1F]/50 flex-1">{DEMO_POST.company}</span>
-              <span className="text-xs text-[#1D1D1F]/25 font-mono">{formatDate(DEMO_POST.date)}</span>
+              <span className="text-xs text-[#1D1D1F]/25 font-mono">{DEMO_POST.date}</span>
             </div>
             <div className="bg-[#F5F5F7] rounded-xl px-4 py-4 mb-4">
               <p className="text-sm font-semibold text-[#1D1D1F] group-hover:text-[#4B9FFF] transition-colors leading-snug mb-2">
@@ -118,16 +115,19 @@ export function About() {
               <p className="text-xs text-[#1D1D1F]/50 leading-relaxed">{DEMO_POST.content}</p>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-xs text-[#1D1D1F]/25 font-mono">Voorbeeld bericht</span>
+              <span className="flex items-center gap-1.5 text-xs text-[#1D1D1F]/30">
+                <Heart className="w-3.5 h-3.5" />
+                {DEMO_POST.likes}
+              </span>
               <span className="flex items-center gap-1 text-xs text-[#4B9FFF]/60 group-hover:text-[#4B9FFF] transition font-medium">
                 Ga naar het forum <ArrowRight className="w-3 h-3" />
               </span>
             </div>
-          </a>
+          </Link>
 
-          <a href="/#/forum" className="sm:hidden mt-5 flex items-center justify-center gap-1.5 text-xs text-[#1D1D1F]/40 hover:text-[#1D1D1F] transition font-medium">
+          <Link to="/forum" className="sm:hidden mt-5 flex items-center justify-center gap-1.5 text-xs text-[#1D1D1F]/40 hover:text-[#1D1D1F] transition font-medium">
             Alle berichten <ArrowRight className="w-3.5 h-3.5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
