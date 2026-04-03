@@ -111,19 +111,10 @@ export function ForumPage() {
 
         {/* Page title */}
         <div className="pt-8 pb-10">
-          <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-4">02 / BEDRIJVENPLATFORM</p>
-          <div className="flex items-end justify-between">
-            <div>
-              <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Kennis delen</h1>
-              <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/20 leading-[1.05] tracking-tight">samen groeien.</p>
-            </div>
-            <Link
-              to="/forum/new"
-              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full hover:bg-[#1D1D1F]/75 transition shrink-0"
-            >
-              <PenLine className="w-3.5 h-3.5" />
-              Nieuw bericht
-            </Link>
+          <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-4">02 / BEDRIJVENFORUM</p>
+          <div>
+            <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Kennis delen</h1>
+            <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/20 leading-[1.05] tracking-tight">samen groeien.</p>
           </div>
         </div>
 
@@ -165,12 +156,6 @@ export function ForumPage() {
             </div>
           </form>
         )}
-
-        {/* Mobile new post */}
-        <Link to="/forum/new" className="sm:hidden flex items-center justify-center gap-2 w-full mb-3 py-2.5 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full">
-          <PenLine className="w-3.5 h-3.5" />
-          Nieuw uitgebreid bericht
-        </Link>
 
         {/* Posts */}
         {loading ? (
