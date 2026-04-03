@@ -122,7 +122,7 @@ function HomePage() {
       <ErrorBoundary><Hero /></ErrorBoundary>
       <ErrorBoundary><PartnerCarousel /></ErrorBoundary>
       <ErrorBoundary><About /></ErrorBoundary>
-      <ErrorBoundary><Questions /></ErrorBoundary>
+      {/* <ErrorBoundary><Questions /></ErrorBoundary> */}
       <ErrorBoundary><Mapping /></ErrorBoundary>
       <ErrorBoundary><CaseStudies /></ErrorBoundary>
       <ErrorBoundary><Participation /></ErrorBoundary>
