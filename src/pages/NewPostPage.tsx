@@ -22,7 +22,7 @@ export function NewPostPage() {
       .insert({ author_id: user!.id, title, content });
 
     if (error) {
-      setError('Bericht kon niet worden geplaatst. Probeer opnieuw.');
+      setError('Fout: ' + error.message);
     } else {
       navigate('/forum');
     }
