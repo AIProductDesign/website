@@ -131,15 +131,60 @@ function HomePage() {
   );
 }
 
+function GlobalCursor() {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const mouse = useRef({ x: -100, y: -100 });
+  const ring = useRef({ x: -100, y: -100 });
+
+  useEffect(() => {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    const dot = dotRef.current;
+    const ringEl = ringRef.current;
+    if (!dot || !ringEl) return;
+    dot.style.opacity = '1';
+    ringEl.style.opacity = '1';
+
+    const onMove = (e: MouseEvent) => { mouse.current = { x: e.clientX, y: e.clientY }; };
+    let rafId: number;
+    const animate = () => {
+      ring.current.x += (mouse.current.x - ring.current.x) * 0.1;
+      ring.current.y += (mouse.current.y - ring.current.y) * 0.1;
+      dot.style.transform = `translate(calc(${mouse.current.x}px - 50%), calc(${mouse.current.y}px - 50%))`;
+      ringEl.style.transform = `translate(calc(${ring.current.x}px - 50%), calc(${ring.current.y}px - 50%))`;
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as Element).closest('a, button')) ringEl.classList.add('is-hovering');
+      else ringEl.classList.remove('is-hovering');
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseover', onOver);
+    return () => { cancelAnimationFrame(rafId); window.removeEventListener('mousemove', onMove); document.removeEventListener('mouseover', onOver); };
+  }, []);
+
+  return (
+    <>
+      <div ref={dotRef} className="cursor-dot" aria-hidden="true" style={{ opacity: 0, background: '#1D1D1F' }} />
+      <div ref={ringRef} className="cursor-ring" aria-hidden="true" style={{ opacity: 0, borderColor: 'rgba(29,29,31,0.45)' }} />
+    </>
+  );
+}
+
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/forum" element={<ProtectedRoute><ForumPage /></ProtectedRoute>} />
-      <Route path="/forum/new" element={<ProtectedRoute><NewPostPage /></ProtectedRoute>} />
-      <Route path="/forum/:id" element={<ProtectedRoute><ForumPostPage /></ProtectedRoute>} />
-    </Routes>
+    <>
+      <GlobalCursor />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forum" element={<ProtectedRoute><ForumPage /></ProtectedRoute>} />
+        <Route path="/forum/new" element={<ProtectedRoute><NewPostPage /></ProtectedRoute>} />
+        <Route path="/forum/:id" element={<ProtectedRoute><ForumPostPage /></ProtectedRoute>} />
+      </Routes>
+    </>
   );
 }

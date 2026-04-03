@@ -15,7 +15,7 @@ export function RegisterPage() {
     setError('');
     setLoading(true);
 
-    const { data, error: signUpError } = await supabase.auth.signUp({ email, password });
+    const { error: signUpError } = await supabase.auth.signUp({ email, password });
 
     if (signUpError) {
       setError(signUpError.message);
@@ -23,16 +23,24 @@ export function RegisterPage() {
       return;
     }
 
-    if (data.user) {
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert({ id: data.user.id, company_name: companyName });
+    // Meld direct aan zodat er een actieve sessie is voor de profielinvoeging
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({ email, password });
 
-      if (profileError) {
-        setError('Account aangemaakt, maar bedrijfsnaam kon niet worden opgeslagen.');
-        setLoading(false);
-        return;
-      }
+    if (signInError || !signInData.user) {
+      setError('Account aangemaakt. Meld je aan om verder te gaan.');
+      setLoading(false);
+      navigate('/login');
+      return;
+    }
+
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .insert({ id: signInData.user.id, company_name: companyName });
+
+    if (profileError) {
+      setError('Profiel kon niet worden opgeslagen: ' + profileError.message);
+      setLoading(false);
+      return;
     }
 
     navigate('/forum');
