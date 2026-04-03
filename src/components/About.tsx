@@ -1,4 +1,4 @@
-import { Zap, Map, Users, TrendingUp, ExternalLink } from 'lucide-react';
+import { Zap, Map, Users, TrendingUp, ExternalLink, MessageSquare } from 'lucide-react';
 
 const focusPoints = [
   {
@@ -78,6 +78,24 @@ export function About() {
               </div>
             );
           })}
+        </div>
+
+        {/* Forum CTA */}
+        <div className="reveal mt-14 pt-10 border-t border-black/6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div>
+            <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-2">BEDRIJVENPLATFORM</p>
+            <h3 className="text-xl font-bold text-[#1D1D1F] mb-1">Deel kennis met andere deelnemers</h3>
+            <p className="text-sm text-[#4A4A4F] leading-relaxed max-w-md">
+              Wissel ervaringen uit, stel vragen en leer van andere bedrijven via ons besloten forum.
+            </p>
+          </div>
+          <a
+            href="/#/forum"
+            className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-[#1D1D1F] text-white text-sm font-semibold rounded-full hover:bg-[#1D1D1F]/80 transition"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            Naar het forum
+          </a>
         </div>
       </div>
     </section>
