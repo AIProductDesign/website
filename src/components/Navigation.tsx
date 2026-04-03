@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const navItems = [
   { label: 'Over', href: '#about' },
@@ -12,6 +13,7 @@ const navItems = [
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [onHero, setOnHero] = useState(true);
+  const { user, profile, signOut } = useAuth();
 
   useEffect(() => {
     const check = () => setOnHero(window.scrollY < window.innerHeight * 0.85);
@@ -56,14 +58,40 @@ export function Navigation() {
                 {item.label}
               </a>
             ))}
-            <a
-              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 ${ctaBg}`}
-            >
-              Neem deel
-            </a>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <a
+                  href="/#/forum"
+                  className={`nav-link text-sm font-medium tracking-wide transition-colors duration-300 ${textColor}`}
+                >
+                  Forum
+                </a>
+                <span className={`text-xs ${onHero ? 'text-white/40' : 'text-[#1D1D1F]/40'}`}>{profile?.company_name}</span>
+                <button
+                  onClick={signOut}
+                  className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 ${ctaBg}`}
+                >
+                  Uitloggen
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-3">
+                <a
+                  href="/#/forum"
+                  className={`nav-link text-sm font-medium tracking-wide transition-colors duration-300 ${textColor}`}
+                >
+                  Forum
+                </a>
+                <a
+                  href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 ${ctaBg}`}
+                >
+                  Neem deel
+                </a>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -95,14 +123,30 @@ export function Navigation() {
             </a>
           ))}
           <a
-            href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/#/forum"
             onClick={() => setIsOpen(false)}
-            className="block mt-2 py-2.5 px-4 bg-[#4B9FFF] text-white rounded-full text-xs font-semibold text-center"
+            className={`block py-2.5 text-xs font-medium tracking-wide transition-colors ${mobileText}`}
           >
-            Neem deel
+            Forum
           </a>
+          {user ? (
+            <button
+              onClick={() => { signOut(); setIsOpen(false); }}
+              className="block w-full mt-2 py-2.5 px-4 bg-[#4B9FFF] text-white rounded-full text-xs font-semibold text-center"
+            >
+              Uitloggen ({profile?.company_name})
+            </button>
+          ) : (
+            <a
+              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="block mt-2 py-2.5 px-4 bg-[#4B9FFF] text-white rounded-full text-xs font-semibold text-center"
+            >
+              Neem deel
+            </a>
+          )}
         </div>
       </div>
     </nav>

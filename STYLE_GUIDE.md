@@ -13,12 +13,12 @@ Gebruik nooit "AIPEC", "Aipec" of andere kapitalisatie.
 
 ## Typografie
 
-| Rol | Font | Gewicht | Klasse |
-|-----|------|---------|--------|
-| Body | Inter | 400 | `font-normal` |
-| Display / headings | Inter | 900 | `font-black` |
-| Merk (aipec) | Dyson Sans Modern | 400–900 | inline style |
-| Labels / mono | Inter (mono) | 400 | `font-mono` |
+
+| Rol           | Font         | Gewicht | Klasse       |
+| ------------- | ------------ | ------- | ------------ |
+| Body          | Inte         | 400–900 | inline style |
+| Labels / mono | Inter (mono) | 400     | `font-mono`  |
+
 
 ### Heading-hiërarchie
 
@@ -37,14 +37,16 @@ Tweede regel is altijd `text-[#1D1D1F]/20` of `text-white/25` — 20% opaciteit.
 
 ## Kleurenpalet
 
-| Naam | Hex | Gebruik |
-|------|-----|---------|
-| Foreground | `#1D1D1F` | Primaire tekst, achtergronden |
-| Achtergrond | `#FFFFFF` | Witte secties |
-| Lichtgrijs | `#F5F5F7` | Kaartachtergronden |
+
+| Naam         | Hex       | Gebruik                              |
+| ------------ | --------- | ------------------------------------ |
+| Foreground   | `#1D1D1F` | Primaire tekst, achtergronden        |
+| Achtergrond  | `#FFFFFF` | Witte secties                        |
+| Lichtgrijs   | `#F5F5F7` | Kaartachtergronden                   |
 | Accent blauw | `#4B9FFF` | Primaire accentkleur, labels, iconen |
-| Muted tekst | `#6E6E73` | Secondaire tekst |
-| Hero dark | `#0A0F1E` | Hero achtergrond |
+| Muted tekst  | `#6E6E73` | Secondaire tekst                     |
+| Hero dark    | `#0A0F1E` | Hero achtergrond                     |
+
 
 ### Opaciteitsniveaus (zwart)
 
@@ -175,3 +177,4 @@ src/
   hooks/
     useReveal.ts              — IntersectionObserver voor scroll reveals
 ```
+

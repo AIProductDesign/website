@@ -1,4 +1,5 @@
 import { useEffect, useRef, Component, ReactNode } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Questions } from './components/Questions';
@@ -8,6 +9,12 @@ import { CaseStudies } from './components/CaseStudies';
 import { Contact } from './components/Contact';
 import { Navigation } from './components/Navigation';
 import { PartnerCarousel } from './components/PartnerCarousel';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
+import { ForumPage } from './pages/ForumPage';
+import { NewPostPage } from './pages/NewPostPage';
+import { ForumPostPage } from './pages/ForumPostPage';
 import { useReveal } from './hooks/useReveal';
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
@@ -30,10 +37,9 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
   }
 }
 
-export default function App() {
+function HomePage() {
   useReveal();
 
-  // Scroll progress bar + cursor kleur op hero
   const progressRef = useRef<HTMLDivElement>(null);
   const dotRef2 = useRef<HTMLDivElement>(null);
   const ringRef2 = useRef<HTMLDivElement>(null);
@@ -44,7 +50,6 @@ export default function App() {
         const total = document.body.scrollHeight - window.innerHeight;
         bar.style.width = `${total > 0 ? (window.scrollY / total) * 100 : 0}%`;
       }
-      // Wit op hero, donker daarna
       const onHero = window.scrollY < window.innerHeight * 0.85;
       if (dotRef2.current) dotRef2.current.style.background = onHero ? '#ffffff' : '#1D1D1F';
       if (ringRef2.current) ringRef2.current.style.borderColor = onHero ? 'rgba(255,255,255,0.5)' : 'rgba(29,29,31,0.45)';
@@ -54,22 +59,18 @@ export default function App() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Custom cursor — alleen op pointer-devices, transform i.p.v. top/left
   const dotRef = dotRef2;
   const ringRef = ringRef2;
   const mouse = useRef({ x: -100, y: -100 });
   const ring = useRef({ x: -100, y: -100 });
-  // dotRef2/ringRef2 worden ook gebruikt voor kleurwisseling via scroll
 
   useEffect(() => {
-    // Niet renderen op touch-devices
     if (!window.matchMedia('(pointer: fine)').matches) return;
 
     const dot = dotRef.current;
     const ringEl = ringRef.current;
     if (!dot || !ringEl) return;
 
-    // Cursor zichtbaar maken
     dot.style.opacity = '1';
     ringEl.style.opacity = '1';
 
@@ -109,20 +110,14 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Grain overlay */}
       <div className="grain-overlay" aria-hidden="true" />
-
-      {/* Scroll progress bar */}
       <div
         ref={progressRef}
         className="fixed top-0 left-0 h-[5px] bg-[#4B9FFF] z-[9999] pointer-events-none"
         style={{ width: '0%', boxShadow: '0 0 14px rgba(75,159,255,0.8)' }}
       />
-
-      {/* Custom cursor — verborgen tot pointer-device bevestigd */}
       <div ref={dotRef} className="cursor-dot" aria-hidden="true" style={{ opacity: 0 }} />
       <div ref={ringRef} className="cursor-ring" aria-hidden="true" style={{ opacity: 0 }} />
-
       <Navigation />
       <ErrorBoundary><Hero /></ErrorBoundary>
       <ErrorBoundary><PartnerCarousel /></ErrorBoundary>
@@ -133,5 +128,18 @@ export default function App() {
       <ErrorBoundary><Participation /></ErrorBoundary>
       <ErrorBoundary><Contact /></ErrorBoundary>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/forum" element={<ProtectedRoute><ForumPage /></ProtectedRoute>} />
+      <Route path="/forum/new" element={<ProtectedRoute><NewPostPage /></ProtectedRoute>} />
+      <Route path="/forum/:id" element={<ProtectedRoute><ForumPostPage /></ProtectedRoute>} />
+    </Routes>
   );
 }

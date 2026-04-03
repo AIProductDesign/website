@@ -37,7 +37,12 @@
       "Bash(git push:*)",
       "WebFetch(domain:antons-variant.vercel.app)",
       "Bash(curl:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(find C:Usersantvervoortwebsite-variant -type f -name *.config.* -o -name tailwind* -o -name *.css)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(C:/Users/antvervoort/restyle_pptx.py:*)",
+      "Bash(find /c/Users/antvervoort/OneDrive* -type d -o -type f)"
     ]
   }
 }
