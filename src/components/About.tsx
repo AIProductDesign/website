@@ -83,7 +83,7 @@ export function About() {
         {/* Forum CTA */}
         <div className="reveal mt-14 pt-10 border-t border-black/6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div>
-            <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-2">BEDRIJVENPLATFORM</p>
+            <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-6">BEDRIJVENPLATFORM</p>
             <h3 className="text-xl font-bold text-[#1D1D1F] mb-1">Deel kennis met andere deelnemers</h3>
             <p className="text-sm text-[#4A4A4F] leading-relaxed max-w-md">
               Wissel ervaringen uit, stel vragen en leer van andere bedrijven via ons besloten forum.
