@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase, Post } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
-import { avatarColor, avatarInitial } from '../lib/avatarColor';
+import { avatarColor } from '../lib/avatarColor';
 import { PenLine, LogOut, Heart, MessageSquare } from 'lucide-react';
 
 type PostWithMeta = Post & {
@@ -60,7 +60,6 @@ export function ForumPage() {
     <div className="min-h-screen bg-[#F5F5F7]">
       <div className="grain-overlay" aria-hidden="true" />
 
-      {/* Nav */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-black/6">
         <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 h-14 flex items-center justify-between">
           <a href="/" className="tracking-widest font-bold text-[#1D1D1F]" style={{ fontSize: '1.1rem', fontFamily: "'Dyson Sans Modern', sans-serif" }}>
@@ -69,19 +68,11 @@ export function ForumPage() {
           <div className="flex items-center gap-4">
             {profile && (
               <div className="hidden sm:flex items-center gap-2">
-                <div
-                  className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] font-bold shrink-0"
-                  style={{ background: avatarColor(profile.company_name) }}
-                >
-                  {avatarInitial(profile.company_name)}
-                </div>
+                <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(profile.company_name) }} />
                 <span className="text-xs text-[#1D1D1F]/50">{profile.company_name}</span>
               </div>
             )}
-            <button
-              onClick={signOut}
-              className="flex items-center gap-1.5 text-xs text-[#1D1D1F]/40 hover:text-[#1D1D1F] transition"
-            >
+            <button onClick={signOut} className="flex items-center gap-1.5 text-xs text-[#1D1D1F]/40 hover:text-[#1D1D1F] transition">
               <LogOut className="w-3.5 h-3.5" />
               Uitloggen
             </button>
@@ -90,16 +81,11 @@ export function ForumPage() {
       </header>
 
       <main className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 pt-28 pb-20">
-        {/* Header */}
         <div className="flex items-end justify-between mb-6">
           <div>
             <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-3">02 / BEDRIJVENPLATFORM</p>
-            <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">
-              Kennis delen
-            </h1>
-            <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/30 leading-[1.05] tracking-tight">
-              samen groeien.
-            </p>
+            <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Kennis delen</h1>
+            <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/25 leading-[1.05] tracking-tight">samen groeien.</p>
           </div>
           <Link
             to="/forum/new"
@@ -112,16 +98,11 @@ export function ForumPage() {
 
         <div className="h-px bg-black/8 mb-10" />
 
-        {/* Mobile new post button */}
-        <Link
-          to="/forum/new"
-          className="sm:hidden flex items-center justify-center gap-2 w-full mb-8 py-2.5 bg-[#1D1D1F] text-white text-sm font-semibold rounded-full hover:bg-[#1D1D1F]/80 transition"
-        >
+        <Link to="/forum/new" className="sm:hidden flex items-center justify-center gap-2 w-full mb-8 py-2.5 bg-[#1D1D1F] text-white text-sm font-semibold rounded-full">
           <PenLine className="w-3.5 h-3.5" />
           Nieuw bericht
         </Link>
 
-        {/* Posts */}
         {loading ? (
           <div className="flex justify-center py-24">
             <div className="w-5 h-5 border-2 border-[#4B9FFF] border-t-transparent rounded-full animate-spin" />
@@ -134,34 +115,19 @@ export function ForumPage() {
           <div className="flex flex-col">
             {posts.map((post, i) => {
               const company = (post.profiles as any)?.company_name ?? 'Onbekend';
-              const color = avatarColor(company);
               return (
-                <div key={post.id} className={`flex gap-5 py-7 ${i > 0 ? 'border-t border-black/6' : ''}`}>
-                  {/* Avatar dot */}
-                  <div
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5"
-                    style={{ background: color }}
-                  >
-                    {avatarInitial(company)}
-                  </div>
-
+                <div key={post.id} className={`flex gap-4 py-7 ${i > 0 ? 'border-t border-black/6' : ''}`}>
+                  <div className="w-2 h-2 rounded-full shrink-0 mt-2" style={{ background: avatarColor(company) }} />
                   <div className="flex-1 min-w-0">
-                    {/* Meta */}
                     <div className="flex items-center gap-2 mb-1.5">
                       <span className="text-xs font-semibold text-[#1D1D1F]">{company}</span>
                       <span className="text-[#1D1D1F]/15">·</span>
                       <span className="text-xs text-[#1D1D1F]/35">{formatDate(post.created_at)}</span>
                     </div>
-
-                    {/* Title + excerpt */}
                     <Link to={`/forum/${post.id}`} className="group block">
-                      <h2 className="text-base font-semibold text-[#1D1D1F] group-hover:text-[#4B9FFF] transition leading-snug mb-1">
-                        {post.title}
-                      </h2>
+                      <h2 className="text-base font-semibold text-[#1D1D1F] group-hover:text-[#4B9FFF] transition leading-snug mb-1">{post.title}</h2>
                       <p className="text-sm text-[#1D1D1F]/45 leading-relaxed line-clamp-2">{post.content}</p>
                     </Link>
-
-                    {/* Actions */}
                     <div className="flex items-center gap-5 mt-3">
                       <button
                         onClick={() => toggleLike(post)}

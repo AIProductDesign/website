@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase, Post, Reply } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
-import { avatarColor, avatarInitial } from '../lib/avatarColor';
+import { avatarColor } from '../lib/avatarColor';
 import { ArrowLeft, Send, Heart, LogOut } from 'lucide-react';
 
 type PostWithMeta = Post & {
@@ -58,10 +58,7 @@ export function ForumPostPage() {
       .insert({ post_id: id, author_id: user!.id, content: replyContent })
       .select('*, profiles(company_name)')
       .single();
-    if (!error && data) {
-      setReplies(prev => [...prev, data]);
-      setReplyContent('');
-    }
+    if (!error && data) { setReplies(prev => [...prev, data]); setReplyContent(''); }
     setSubmitting(false);
   };
 
@@ -86,7 +83,6 @@ export function ForumPostPage() {
     <div className="min-h-screen bg-[#F5F5F7]">
       <div className="grain-overlay" aria-hidden="true" />
 
-      {/* Nav */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-black/6">
         <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 h-14 flex items-center justify-between">
           <a href="/" className="tracking-widest font-bold text-[#1D1D1F]" style={{ fontSize: '1.1rem', fontFamily: "'Dyson Sans Modern', sans-serif" }}>
@@ -95,12 +91,7 @@ export function ForumPostPage() {
           <div className="flex items-center gap-4">
             {profile && (
               <div className="hidden sm:flex items-center gap-2">
-                <div
-                  className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] font-bold"
-                  style={{ background: avatarColor(profile.company_name) }}
-                >
-                  {avatarInitial(profile.company_name)}
-                </div>
+                <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(profile.company_name) }} />
                 <span className="text-xs text-[#1D1D1F]/50">{profile.company_name}</span>
               </div>
             )}
@@ -119,82 +110,55 @@ export function ForumPostPage() {
         </Link>
 
         {/* Post */}
-        <div className="flex gap-5 mb-12">
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 mt-1"
-            style={{ background: avatarColor(postCompany) }}
+        <div className="bg-white rounded-2xl border border-black/6 p-6 sm:p-8 mb-4">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(postCompany) }} />
+            <span className="text-xs font-semibold text-[#1D1D1F]">{postCompany}</span>
+            <span className="text-[#1D1D1F]/15">·</span>
+            <span className="text-xs text-[#1D1D1F]/35">{formatDate(post.created_at)}</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black text-[#1D1D1F] leading-tight tracking-tight mb-4">{post.title}</h1>
+          <p className="text-sm text-[#4A4A4F] leading-relaxed whitespace-pre-wrap mb-6">{post.content}</p>
+          <button
+            onClick={toggleLike}
+            className={`flex items-center gap-1.5 text-xs transition ${post.liked_by_me ? 'text-[#EF4444]' : 'text-[#1D1D1F]/30 hover:text-[#EF4444]'}`}
           >
-            {avatarInitial(postCompany)}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm font-semibold text-[#1D1D1F]">{postCompany}</span>
-              <span className="text-[#1D1D1F]/15">·</span>
-              <span className="text-xs text-[#1D1D1F]/35">{formatDate(post.created_at)}</span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-[#1D1D1F] leading-tight tracking-tight mb-4">{post.title}</h1>
-            <p className="text-sm text-[#4A4A4F] leading-relaxed whitespace-pre-wrap mb-5">{post.content}</p>
-            <button
-              onClick={toggleLike}
-              className={`flex items-center gap-1.5 text-xs transition ${post.liked_by_me ? 'text-[#EF4444]' : 'text-[#1D1D1F]/30 hover:text-[#EF4444]'}`}
-            >
-              <Heart className={`w-3.5 h-3.5 ${post.liked_by_me ? 'fill-current' : ''}`} />
-              {post.like_count} {post.like_count === 1 ? 'like' : 'likes'}
-            </button>
-          </div>
+            <Heart className={`w-3.5 h-3.5 ${post.liked_by_me ? 'fill-current' : ''}`} />
+            {post.like_count} {post.like_count === 1 ? 'like' : 'likes'}
+          </button>
         </div>
 
         {/* Replies */}
-        {replies.length > 0 && (
-          <>
-            <div className="h-px bg-black/8 mb-8" />
-            <p className="text-xs font-mono text-[#1D1D1F]/30 tracking-widest mb-6">
-              {replies.length} {replies.length === 1 ? 'ANTWOORD' : 'ANTWOORDEN'}
-            </p>
-            <div className="flex flex-col">
-              {replies.map((reply, i) => {
-                const rc = (reply.profiles as any)?.company_name ?? 'Onbekend';
-                return (
-                  <div key={reply.id} className={`flex gap-4 py-6 ${i > 0 ? 'border-t border-black/6' : ''}`}>
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold shrink-0 mt-0.5"
-                      style={{ background: avatarColor(rc) }}
-                    >
-                      {avatarInitial(rc)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-semibold text-[#1D1D1F]">{rc}</span>
-                        <span className="text-[#1D1D1F]/15">·</span>
-                        <span className="text-xs text-[#1D1D1F]/35">{formatDate(reply.created_at)}</span>
-                      </div>
-                      <p className="text-sm text-[#4A4A4F] leading-relaxed whitespace-pre-wrap">{reply.content}</p>
-                    </div>
-                  </div>
-                );
-              })}
+        {replies.map((reply) => {
+          const rc = (reply.profiles as any)?.company_name ?? 'Onbekend';
+          return (
+            <div key={reply.id} className="bg-white rounded-2xl border border-black/6 p-5 sm:p-6 mb-3">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(rc) }} />
+                <span className="text-xs font-semibold text-[#1D1D1F]">{rc}</span>
+                <span className="text-[#1D1D1F]/15">·</span>
+                <span className="text-xs text-[#1D1D1F]/35">{formatDate(reply.created_at)}</span>
+              </div>
+              <p className="text-sm text-[#4A4A4F] leading-relaxed whitespace-pre-wrap">{reply.content}</p>
             </div>
-          </>
-        )}
+          );
+        })}
 
         {/* Reply form */}
-        <div className="h-px bg-black/8 my-8" />
         {profile && (
-          <div className="flex gap-4">
-            <div
-              className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold shrink-0 mt-2"
-              style={{ background: avatarColor(profile.company_name) }}
-            >
-              {avatarInitial(profile.company_name)}
+          <div className="bg-white rounded-2xl border border-black/6 p-5 sm:p-6 mt-4">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(profile.company_name) }} />
+              <span className="text-xs text-[#1D1D1F]/40">{profile.company_name}</span>
             </div>
-            <form onSubmit={handleReply} className="flex-1">
+            <form onSubmit={handleReply}>
               <textarea
                 value={replyContent}
                 onChange={e => setReplyContent(e.target.value)}
                 required
-                rows={4}
+                rows={3}
                 placeholder="Schrijf een antwoord…"
-                className="w-full px-4 py-3 rounded-xl border border-black/10 bg-white text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/25 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/30 focus:border-[#4B9FFF] transition resize-none mb-3"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-black/8 bg-[#F5F5F7] text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/25 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/30 focus:border-[#4B9FFF] transition resize-none mb-3"
               />
               <button
                 type="submit"
@@ -202,7 +166,7 @@ export function ForumPostPage() {
                 className="flex items-center gap-2 px-5 py-2 bg-[#1D1D1F] text-white text-xs font-semibold rounded-full hover:bg-[#1D1D1F]/80 transition disabled:opacity-40"
               >
                 <Send className="w-3 h-3" />
-                {submitting ? 'Versturen…' : 'Antwoord plaatsen'}
+                {submitting ? 'Versturen…' : 'Plaatsen'}
               </button>
             </form>
           </div>
