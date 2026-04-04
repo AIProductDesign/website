@@ -37,7 +37,7 @@ function useFadeIn() {
 
 /* ── Single post card ── */
 function PostCard({
-  post, user, profile, onLike, onReply, onDelete, onPin, onVote,
+  post, user, profile, onLike, onReply, onDelete, onPin, onVote, onDeleteReply,
 }: {
   post: PostWithMeta;
   user: any;
@@ -47,6 +47,7 @@ function PostCard({
   onDelete: (postId: string) => void;
   onPin: (post: PostWithMeta) => void;
   onVote: (postId: string, optionId: string) => void;
+  onDeleteReply: (postId: string, replyId: string) => void;
 }) {
   const ref = useFadeIn();
   const [replyText, setReplyText] = useState('');
@@ -174,10 +175,21 @@ function PostCard({
         <div className="border-t border-black/4 overflow-y-auto" style={{ maxHeight: '15rem' }}>
           {post.replies.map(reply => {
             const rc = (reply.profiles as any)?.company_name ?? 'Onbekend';
+            const isOwn = user?.id === reply.author_id;
             return (
-              <div key={reply.id} className="pl-8 pr-5 py-2.5 border-b border-black/3 last:border-0">
-                <span className="text-[0.68rem] font-semibold text-[#4B9FFF] mr-2">{rc}</span>
-                <span className="text-[0.68rem] text-[#1D1D1F]/55 leading-relaxed">{reply.content}</span>
+              <div key={reply.id} className="pl-12 pr-4 py-2.5 border-b border-black/3 last:border-0 flex items-start justify-between gap-2 group/reply">
+                <div>
+                  <span className="text-[0.68rem] font-semibold text-[#4B9FFF] mr-2">{rc}</span>
+                  <span className="text-[0.68rem] text-[#1D1D1F]/55 leading-relaxed">{reply.content}</span>
+                </div>
+                {isOwn && (
+                  <button
+                    onClick={() => onDeleteReply(post.id, reply.id)}
+                    className="opacity-0 group-hover/reply:opacity-100 transition text-[#1D1D1F]/20 hover:text-red-400 shrink-0 mt-0.5"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                  </button>
+                )}
               </div>
             );
           })}
@@ -301,6 +313,13 @@ export function ForumPage() {
   const handleDelete = async (postId: string) => {
     await supabase.from('posts').delete().eq('id', postId);
     setPosts(prev => prev.filter(p => p.id !== postId));
+  };
+
+  const handleDeleteReply = async (postId: string, replyId: string) => {
+    await supabase.from('replies').delete().eq('id', replyId);
+    setPosts(prev => prev.map(p =>
+      p.id === postId ? { ...p, replies: p.replies.filter(r => r.id !== replyId) } : p
+    ));
   };
 
   const handlePin = async (post: PostWithMeta) => {
@@ -537,6 +556,7 @@ export function ForumPage() {
                 onDelete={handleDelete}
                 onPin={handlePin}
                 onVote={handleVote}
+                onDeleteReply={handleDeleteReply}
               />
             ))}
           </div>
