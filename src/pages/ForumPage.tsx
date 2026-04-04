@@ -20,14 +20,15 @@ type PostWithMeta = Post & {
 };
 
 /* ── Scroll-fade hook ── */
-function useFadeIn() {
+function useFadeIn(delay = 0) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    el.style.transitionDelay = `${delay}ms`;
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; obs.disconnect(); } },
-      { threshold: 0.08 }
+      { threshold: 0.05 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -37,7 +38,7 @@ function useFadeIn() {
 
 /* ── Single post card ── */
 function PostCard({
-  post, user, profile, onLike, onReply, onDelete, onPin, onVote, onDeleteReply,
+  post, user, profile, onLike, onReply, onDelete, onPin, onVote, onDeleteReply, index = 0,
 }: {
   post: PostWithMeta;
   user: any;
@@ -48,8 +49,9 @@ function PostCard({
   onPin: (post: PostWithMeta) => void;
   onVote: (postId: string, optionId: string) => void;
   onDeleteReply: (postId: string, replyId: string) => void;
+  index?: number;
 }) {
-  const ref = useFadeIn();
+  const ref = useFadeIn(Math.min(index * 70, 350));
   const [replyText, setReplyText] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [replyFocused, setReplyFocused] = useState(false);
@@ -68,7 +70,7 @@ function PostCard({
 
   return (
     <div ref={ref} style={{ opacity: 0, transform: 'translateY(18px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }} className="relative group/card">
-      <div className={`absolute -inset-2 rounded-3xl bg-gradient-to-br from-[#4B9FFF]/8 to-transparent blur-xl pointer-events-none transition-opacity duration-500 ${replyFocused || replyText ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'}`} />
+      <div className={`absolute -inset-2 rounded-3xl bg-gradient-to-br from-[#4B9FFF]/14 to-transparent blur-xl pointer-events-none transition-opacity duration-500 ${replyFocused || replyText ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'}`} />
     <div
       className="relative bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] overflow-hidden"
     >
@@ -233,11 +235,18 @@ export function ForumPage() {
   const [pollOptions, setPollOptions] = useState(['', '']);
   const [submitting, setSubmitting] = useState(false);
 
+  // Page title animation refs
+  const titleLabelRef = useFadeIn(0);
+  const titleLineRef = useFadeIn(80);
+  const titleH1Ref = useFadeIn(150);
+  const titleH2Ref = useFadeIn(220);
+  const composeRef = useFadeIn(300);
+
   // Demo post
   const [demoLiked, setDemoLiked] = useState(false);
   const [demoReplies, setDemoReplies] = useState<{ company: string; text: string }[]>([]);
   const [demoReplyText, setDemoReplyText] = useState('');
-  const demoRef = useFadeIn();
+  const demoRef = useFadeIn(0);
 
   const fetchPosts = useCallback(async () => {
     const { data } = await supabase
@@ -400,15 +409,23 @@ export function ForumPage() {
 
         {/* Page title */}
         <div className="pt-8 pb-10">
-          <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-4">02 / BEDRIJVENFORUM</p>
-          <div className="h-px bg-black/8 mb-8" />
-          <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Kennis delen</h1>
-          <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/15 leading-[1.05] tracking-tight">samen groeien.</p>
+          <div ref={titleLabelRef} style={{ opacity: 0, transform: 'translateY(14px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }}>
+            <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-4">02 / BEDRIJVENFORUM</p>
+          </div>
+          <div ref={titleLineRef} style={{ opacity: 0, transform: 'translateY(8px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }}>
+            <div className="h-px bg-black/8 mb-8" />
+          </div>
+          <div ref={titleH1Ref} style={{ opacity: 0, transform: 'translateY(14px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>
+            <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Kennis delen</h1>
+          </div>
+          <div ref={titleH2Ref} style={{ opacity: 0, transform: 'translateY(14px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>
+            <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/15 leading-[1.05] tracking-tight">samen groeien.</p>
+          </div>
         </div>
 
         {/* Compose */}
         {profile && (
-          <form onSubmit={handleCompose} className="bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] p-5 mb-4">
+          <form ref={composeRef as any} onSubmit={handleCompose} style={{ opacity: 0, transform: 'translateY(14px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }} className="bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] p-5 mb-4">
             {/* Type switcher */}
             <div className="flex items-center gap-2 mb-4">
               <button
@@ -546,7 +563,7 @@ export function ForumPage() {
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            {posts.map(post => (
+            {posts.map((post, i) => (
               <PostCard
                 key={post.id}
                 post={post}
@@ -558,6 +575,7 @@ export function ForumPage() {
                 onPin={handlePin}
                 onVote={handleVote}
                 onDeleteReply={handleDeleteReply}
+                index={i}
               />
             ))}
           </div>
