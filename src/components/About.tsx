@@ -60,8 +60,9 @@ export function About() {
         </div>
 
         {/* Bedrijvenforum — label BUITEN reveal zodat sticky werkt */}
-        <div className="mt-14 pt-10 border-t border-black/6">
+        <div className="mt-14 pt-10">
           <p className="section-label text-xs font-mono text-[#4B9FFF] tracking-widest mb-6">02 / BEDRIJVENFORUM</p>
+          <div className="reveal-line h-px bg-black/8 mb-14" />
 
           <div className="reveal">
             <div className="mb-8">
