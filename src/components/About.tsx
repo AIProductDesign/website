@@ -69,14 +69,16 @@ export function About() {
                 <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Wat er leeft</span>
               </div>
               <div className="reveal-heading" style={{ transitionDelay: '80ms' }}>
-                <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F]/25 leading-[1.05] tracking-tight">bij de deelnemers.</span>
+                <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F]/75 leading-[1.05] tracking-tight">bij de deelnemers.</span>
               </div>
             </div>
 
             {/* Demo tweet — glaskaart, read-only */}
+            <div className="relative">
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-[#4B9FFF]/6 to-transparent blur-xl pointer-events-none" />
             <Link
               to="/forum"
-              className="block rounded-2xl border border-black/6 bg-white/80 backdrop-blur-sm shadow-[0_2px_16px_rgba(0,0,0,0.06)] px-6 py-5 hover:shadow-[0_4px_24px_rgba(75,159,255,0.1)] hover:border-[#4B9FFF]/20 transition-all duration-300 group"
+              className="relative block rounded-2xl border border-black/6 bg-white/80 backdrop-blur-sm shadow-[0_2px_16px_rgba(0,0,0,0.06)] px-6 py-5 hover:shadow-[0_4px_24px_rgba(75,159,255,0.1)] hover:border-[#4B9FFF]/20 transition-all duration-300 group"
             >
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-xs font-semibold text-[#4B9FFF]">{DEMO_POST.company}</span>
@@ -94,6 +96,7 @@ export function About() {
                 </span>
               </div>
             </Link>
+            </div>
           </div>
         </div>
       </div>

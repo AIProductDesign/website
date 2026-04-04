@@ -174,9 +174,9 @@ function PostCard({
           {post.replies.map(reply => {
             const rc = (reply.profiles as any)?.company_name ?? 'Onbekend';
             return (
-              <div key={reply.id} className="px-5 py-3 border-b border-black/3 last:border-0">
-                <span className="text-xs font-semibold text-[#4B9FFF] mr-2">{rc}</span>
-                <span className="text-xs text-[#1D1D1F]/60 leading-relaxed">{reply.content}</span>
+              <div key={reply.id} className="pl-8 pr-5 py-2.5 border-b border-black/3 last:border-0">
+                <span className="text-[0.68rem] font-semibold text-[#4B9FFF] mr-2">{rc}</span>
+                <span className="text-[0.68rem] text-[#1D1D1F]/55 leading-relaxed">{reply.content}</span>
               </div>
             );
           })}
