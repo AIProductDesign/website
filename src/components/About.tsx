@@ -66,10 +66,10 @@ export function About() {
           <div className="reveal">
             <div className="mb-8">
               <div className="reveal-heading">
-                <span className="text-3xl sm:text-4xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Wat er leeft</span>
+                <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Wat er leeft</span>
               </div>
               <div className="reveal-heading" style={{ transitionDelay: '80ms' }}>
-                <span className="text-3xl sm:text-4xl font-black text-[#1D1D1F]/25 leading-[1.05] tracking-tight">bij de deelnemers.</span>
+                <span className="text-5xl sm:text-6xl font-black text-[#1D1D1F]/25 leading-[1.05] tracking-tight">bij de deelnemers.</span>
               </div>
             </div>
 
