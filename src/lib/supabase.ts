@@ -11,6 +11,11 @@ export type Profile = {
   created_at: string;
 };
 
+export type PollOption = {
+  id: string;
+  text: string;
+};
+
 export type Post = {
   id: string;
   author_id: string;
@@ -18,6 +23,9 @@ export type Post = {
   content: string;
   created_at: string;
   profiles?: Profile;
+  is_pinned?: boolean;
+  post_type?: 'text' | 'poll';
+  poll_options?: PollOption[];
 };
 
 export type Reply = {

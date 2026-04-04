@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
 
 const navItems = [
-  { label: 'Over', href: '#about' },
-  { label: 'AI per fase', href: '#mapping' },
-  { label: 'Cases', href: '#case-studies' },
-  { label: 'Deelnemen', href: '#participate' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Over', id: 'about' },
+  { label: 'AI per fase', id: 'mapping' },
+  { label: 'Cases', id: 'case-studies' },
+  { label: 'Deelnemen', id: 'participate' },
+  { label: 'Contact', id: 'contact' },
 ];
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [onHero, setOnHero] = useState(true);
-  const { user, profile } = useAuth();
 
   useEffect(() => {
     const check = () => setOnHero(window.scrollY < window.innerHeight * 0.85);
@@ -21,6 +19,12 @@ export function Navigation() {
     window.addEventListener('scroll', check, { passive: true });
     return () => window.removeEventListener('scroll', check);
   }, []);
+
+  const scrollTo = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setIsOpen(false);
+  };
 
   const textColor = onHero ? 'text-white/70 hover:text-white' : 'text-[#1D1D1F]/70 hover:text-[#1D1D1F]';
   const brandColor = onHero ? 'text-white' : 'text-[#1D1D1F]';
@@ -38,54 +42,41 @@ export function Navigation() {
     <nav className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${navBg}`}>
       <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12">
         <div className="flex justify-between items-center h-14">
-          {/* Brand name — replaces logo */}
           <a
             href="#"
+            onClick={e => scrollTo(e, 'hero')}
             className={`tracking-widest font-bold transition-colors duration-500 opacity-0 animate-[fadeIn_0.6s_ease_0.1s_forwards] ${brandColor}`}
-          style={{ fontSize: '1.1rem', lineHeight: '1', fontFamily: "'Dyson Sans Modern', sans-serif" }}
+            style={{ fontSize: '1.1rem', lineHeight: '1', fontFamily: "'Dyson Sans Modern', sans-serif" }}
           >
             aipec
           </a>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-7 opacity-0 animate-[fadeIn_0.6s_ease_0.3s_forwards]">
-            {navItems.map((item) => (
+            {navItems.map(item => (
               <a
-                key={item.href}
-                href={item.href}
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={e => scrollTo(e, item.id)}
                 className={`nav-link text-sm font-medium tracking-wide transition-colors duration-300 ${textColor}`}
               >
                 {item.label}
               </a>
             ))}
-            {user ? (
-              <div className="flex items-center gap-4">
-                <a
-                  href="/#/forum"
-                  className={`nav-link text-sm font-medium tracking-wide transition-colors duration-300 ${textColor}`}
-                >
-                  Forum
-                </a>
-                <span className={`text-xs ${onHero ? 'text-white/40' : 'text-[#1D1D1F]/40'}`}>{profile?.company_name}</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-3">
-                <a
-                  href="/#/forum"
-                  className={`nav-link text-sm font-medium tracking-wide transition-colors duration-300 ${textColor}`}
-                >
-                  Forum
-                </a>
-                <a
-                  href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 ${ctaBg}`}
-                >
-                  Neem deel
-                </a>
-              </div>
-            )}
+            <a
+              href="/#/forum"
+              className={`nav-link text-sm font-medium tracking-wide transition-colors duration-300 ${textColor}`}
+            >
+              Forum
+            </a>
+            <a
+              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 ${ctaBg}`}
+            >
+              Wordt lid
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -106,11 +97,11 @@ export function Navigation() {
         } ${mobileBg}`}
       >
         <div className={`py-3 border-t px-4 sm:px-6 lg:px-8 ${mobileDivider}`}>
-          {navItems.map((item) => (
+          {navItems.map(item => (
             <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setIsOpen(false)}
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={e => scrollTo(e, item.id)}
               className={`block py-2.5 text-xs font-medium tracking-wide transition-colors ${mobileText}`}
             >
               {item.label}
@@ -123,17 +114,15 @@ export function Navigation() {
           >
             Forum
           </a>
-          {!user && (
-            <a
-              href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsOpen(false)}
-              className="block mt-2 py-2.5 px-4 bg-[#4B9FFF] text-white rounded-full text-xs font-semibold text-center"
-            >
-              Neem deel
-            </a>
-          )}
+          <a
+            href="https://forms.office.com/pages/responsepage.aspx?id=-wgueVQtjkqvciAlSBNu9lP3AWYSl-9Dtiyf_E4rwNNUMkNRMTRBU0JJVjNSTUxQRDhTMTRUTVlXUy4u&route=shorturl"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsOpen(false)}
+            className="block mt-2 py-2.5 px-4 bg-[#4B9FFF] text-white rounded-full text-xs font-semibold text-center"
+          >
+            Wordt lid
+          </a>
         </div>
       </div>
     </nav>
