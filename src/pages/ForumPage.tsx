@@ -67,8 +67,8 @@ function PostCard({
   const totalVotes = post.poll_options?.reduce((sum, opt) => sum + (post.vote_counts?.[opt.id] ?? 0), 0) ?? 0;
 
   return (
-    <div ref={ref} style={{ opacity: 0, transform: 'translateY(18px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }} className="relative">
-      <div className={`absolute -inset-2 rounded-3xl bg-gradient-to-br from-[#4B9FFF]/8 to-transparent blur-xl pointer-events-none transition-opacity duration-500 ${replyFocused || replyText ? 'opacity-100' : 'opacity-0'}`} />
+    <div ref={ref} style={{ opacity: 0, transform: 'translateY(18px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }} className="relative group/card">
+      <div className={`absolute -inset-2 rounded-3xl bg-gradient-to-br from-[#4B9FFF]/8 to-transparent blur-xl pointer-events-none transition-opacity duration-500 ${replyFocused || replyText ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'}`} />
     <div
       className="relative bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] overflow-hidden"
     >
@@ -401,6 +401,7 @@ export function ForumPage() {
         {/* Page title */}
         <div className="pt-8 pb-10">
           <p className="text-xs font-mono text-[#4B9FFF] tracking-widest mb-4">02 / BEDRIJVENFORUM</p>
+          <div className="h-px bg-black/8 mb-8" />
           <h1 className="text-4xl sm:text-5xl font-black text-[#1D1D1F] leading-[1.05] tracking-tight">Kennis delen</h1>
           <p className="text-4xl sm:text-5xl font-black text-[#1D1D1F]/15 leading-[1.05] tracking-tight">samen groeien.</p>
         </div>
