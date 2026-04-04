@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { sanitize } from '../lib/sanitize';
 import { useAuth } from '../contexts/AuthContext';
 import { ArrowLeft, Send } from 'lucide-react';
 
@@ -17,10 +18,11 @@ export function NewPostPage() {
     setError('');
     setLoading(true);
 
-    const title = content.trim().split('\n')[0].slice(0, 80);
+    const cleanContent = sanitize(content.trim());
+    const title = sanitize(content.trim().split('\n')[0].slice(0, 80));
     const { error } = await supabase
       .from('posts')
-      .insert({ author_id: user!.id, title, content: content.trim() });
+      .insert({ author_id: user!.id, title, content: cleanContent });
 
     if (error) {
       setError('Fout: ' + error.message);
@@ -55,6 +57,7 @@ export function NewPostPage() {
               onChange={e => setContent(e.target.value)}
               required
               rows={10}
+              maxLength={5000}
               placeholder="Schrijf hier je bericht…"
               className="w-full px-3.5 py-3 rounded-xl border border-black/10 bg-[#F5F5F7] text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/30 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/40 focus:border-[#4B9FFF] transition resize-none leading-relaxed"
             />

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { sanitize } from '../lib/sanitize';
 
 export function RegisterPage() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export function RegisterPage() {
 
     const { error: profileError } = await supabase
       .from('profiles')
-      .insert({ id: signInData.user.id, company_name: companyName });
+      .insert({ id: signInData.user.id, company_name: sanitize(companyName.trim()) });
 
     if (profileError) {
       setError('Profiel kon niet worden opgeslagen: ' + profileError.message);
@@ -66,6 +67,7 @@ export function RegisterPage() {
                 value={companyName}
                 onChange={e => setCompanyName(e.target.value)}
                 required
+                maxLength={100}
                 placeholder="Jouw bedrijf BV"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 bg-[#F5F5F7] text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/30 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/40 focus:border-[#4B9FFF] transition"
               />
@@ -90,8 +92,9 @@ export function RegisterPage() {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
-                minLength={6}
-                placeholder="Minimaal 6 tekens"
+                minLength={8}
+                maxLength={128}
+                placeholder="Minimaal 8 tekens"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-black/10 bg-[#F5F5F7] text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/30 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/40 focus:border-[#4B9FFF] transition"
               />
             </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { supabase, Post, Reply, PollOption } from '../lib/supabase';
+import { sanitize } from '../lib/sanitize';
 import { useAuth } from '../contexts/AuthContext';
 import { DEMO_POST } from '../lib/demoPost';
 import { LogOut, Heart, Send, Trash2, Pin, PinOff, Plus, X, BarChart2 } from 'lucide-react';
@@ -189,6 +190,7 @@ function PostCard({
             type="text"
             value={replyText}
             onChange={e => setReplyText(e.target.value)}
+            maxLength={2000}
             placeholder="Reageer…"
             className="flex-1 text-xs text-[#1D1D1F] placeholder:text-[#1D1D1F]/25 bg-transparent focus:outline-none"
           />
@@ -284,7 +286,7 @@ export function ForumPage() {
     if (!user) return;
     const { data, error } = await supabase
       .from('replies')
-      .insert({ post_id: postId, author_id: user.id, content: text })
+      .insert({ post_id: postId, author_id: user.id, content: sanitize(text) })
       .select('*, profiles(company_name)')
       .single();
     if (!error && data) {
@@ -333,8 +335,8 @@ export function ForumPage() {
 
     await supabase.from('posts').insert({
       author_id: user.id,
-      title,
-      content: composeText.trim(),
+      title: sanitize(title),
+      content: sanitize(composeText.trim()),
       post_type: composeType,
       ...(composeType === 'poll' ? { poll_options: options } : {}),
     });
@@ -406,6 +408,7 @@ export function ForumPage() {
               value={composeText}
               onChange={e => setComposeText(e.target.value)}
               rows={3}
+              maxLength={5000}
               placeholder={composeType === 'poll' ? 'Stel je vraag…' : 'Deel een gedachte…'}
               className="w-full text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/25 bg-[#F7F7F7] rounded-xl px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/15 leading-relaxed mb-3"
             />

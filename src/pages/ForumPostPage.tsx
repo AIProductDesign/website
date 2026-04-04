@@ -60,7 +60,7 @@ export function ForumPostPage() {
     setSubmitting(true);
     const { data, error } = await supabase
       .from('replies')
-      .insert({ post_id: id, author_id: user!.id, content: replyContent })
+      .insert({ post_id: id, author_id: user!.id, content: replyContent.trim() })
       .select('*, profiles(company_name)')
       .single();
     if (!error && data) { setReplies(prev => [...prev, data]); setReplyContent(''); }
@@ -79,8 +79,7 @@ export function ForumPostPage() {
         <div className="flex items-center gap-3">
           {profile && (
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(profile.company_name) }} />
-              <span className="hidden sm:block text-xs text-[#1D1D1F]/45">{profile.company_name}</span>
+              <span className="text-xs font-semibold text-[#4B9FFF]">{profile.company_name}</span>
             </div>
           )}
           <button onClick={signOut} className="text-xs text-[#1D1D1F]/35 hover:text-[#1D1D1F] transition flex items-center gap-1.5">
@@ -106,14 +105,13 @@ export function ForumPostPage() {
         <div className="grain-overlay" aria-hidden="true" />
         <Header />
         <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-24 pb-20">
-          <Link to="/forum" className="inline-flex items-center gap-1.5 text-xs text-[#1D1D1F]/35 hover:text-[#1D1D1F] transition mb-10">
+          <a href="/" className="inline-flex items-center gap-1.5 text-xs text-[#1D1D1F]/35 hover:text-[#1D1D1F] transition mb-10">
             <ArrowLeft className="w-3.5 h-3.5" />
-            Terug naar forum
-          </Link>
+            Terug naar website
+          </a>
           <div className="bg-white rounded-2xl border border-black/6 p-6 sm:p-8 mb-4">
             <div className="flex items-center gap-2 mb-5">
-              <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(DEMO_POST.company) }} />
-              <span className="text-xs font-semibold text-[#1D1D1F]">{DEMO_POST.company}</span>
+              <span className="text-xs font-semibold text-[#4B9FFF]">{DEMO_POST.company}</span>
               <span className="text-[#1D1D1F]/15">·</span>
               <span className="text-xs text-[#1D1D1F]/35">{DEMO_POST.date}</span>
             </div>
@@ -153,8 +151,7 @@ export function ForumPostPage() {
         {/* Post */}
         <div className="bg-white rounded-2xl border border-black/6 p-6 sm:p-8 mb-4">
           <div className="flex items-center gap-2 mb-5">
-            <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(postCompany) }} />
-            <span className="text-xs font-semibold text-[#1D1D1F]">{postCompany}</span>
+            <span className="text-xs font-semibold text-[#4B9FFF]">{postCompany}</span>
             <span className="text-[#1D1D1F]/15">·</span>
             <span className="text-xs text-[#1D1D1F]/35">{formatDate(post.created_at)}</span>
           </div>
@@ -174,8 +171,7 @@ export function ForumPostPage() {
           return (
             <div key={reply.id} className="bg-white rounded-2xl border border-black/6 p-5 mb-3">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(rc) }} />
-                <span className="text-xs font-semibold text-[#1D1D1F]">{rc}</span>
+                <span className="text-xs font-semibold text-[#4B9FFF]">{rc}</span>
                 <span className="text-[#1D1D1F]/15">·</span>
                 <span className="text-xs text-[#1D1D1F]/35">{formatDate(reply.created_at)}</span>
               </div>
@@ -188,8 +184,7 @@ export function ForumPostPage() {
         {profile && (
           <div className="bg-white rounded-2xl border border-black/6 p-5 mt-4">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 rounded-full shrink-0" style={{ background: avatarColor(profile.company_name) }} />
-              <span className="text-xs text-[#1D1D1F]/40">{profile.company_name}</span>
+              <span className="text-xs font-semibold text-[#4B9FFF]">{profile.company_name}</span>
             </div>
             <form onSubmit={handleReply}>
               <textarea
@@ -197,6 +192,7 @@ export function ForumPostPage() {
                 onChange={e => setReplyContent(e.target.value)}
                 required
                 rows={3}
+                maxLength={2000}
                 placeholder="Schrijf een antwoord…"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-black/8 bg-[#F5F5F7] text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/25 focus:outline-none focus:ring-2 focus:ring-[#4B9FFF]/30 focus:border-[#4B9FFF] transition resize-none mb-3"
               />
