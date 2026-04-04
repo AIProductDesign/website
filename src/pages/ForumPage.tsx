@@ -240,7 +240,6 @@ export function ForumPage() {
   const titleLineRef = useFadeIn(80);
   const titleH1Ref = useFadeIn(150);
   const titleH2Ref = useFadeIn(220);
-  const composeRef = useFadeIn(300);
 
   // Demo post
   const [demoLiked, setDemoLiked] = useState(false);
@@ -425,7 +424,7 @@ export function ForumPage() {
 
         {/* Compose */}
         {profile && (
-          <form ref={composeRef as any} onSubmit={handleCompose} style={{ opacity: 0, transform: 'translateY(14px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }} className="bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] p-5 mb-4">
+          <form onSubmit={handleCompose} style={{ animation: 'fadeIn 0.5s ease 0.25s both' }} className="bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] p-5 mb-4">
             {/* Type switcher */}
             <div className="flex items-center gap-2 mb-4">
               <button
