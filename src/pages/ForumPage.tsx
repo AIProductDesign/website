@@ -51,6 +51,7 @@ function PostCard({
   const ref = useFadeIn();
   const [replyText, setReplyText] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [replyFocused, setReplyFocused] = useState(false);
 
   const handleReply = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,10 +66,10 @@ function PostCard({
   const totalVotes = post.poll_options?.reduce((sum, opt) => sum + (post.vote_counts?.[opt.id] ?? 0), 0) ?? 0;
 
   return (
+    <div ref={ref} style={{ opacity: 0, transform: 'translateY(18px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }} className="relative">
+      <div className={`absolute -inset-2 rounded-3xl bg-gradient-to-br from-[#4B9FFF]/8 to-transparent blur-xl pointer-events-none transition-opacity duration-500 ${replyFocused || replyText ? 'opacity-100' : 'opacity-0'}`} />
     <div
-      ref={ref}
-      style={{ opacity: 0, transform: 'translateY(18px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }}
-      className="bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] overflow-hidden"
+      className="relative bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] overflow-hidden"
     >
       {/* Post header */}
       <div className="px-5 pt-5 pb-0">
@@ -190,6 +191,8 @@ function PostCard({
             type="text"
             value={replyText}
             onChange={e => setReplyText(e.target.value)}
+            onFocus={() => setReplyFocused(true)}
+            onBlur={() => setReplyFocused(false)}
             maxLength={2000}
             placeholder="Reageer…"
             className="flex-1 text-xs text-[#1D1D1F] placeholder:text-[#1D1D1F]/25 bg-transparent focus:outline-none"
@@ -201,6 +204,7 @@ function PostCard({
           )}
         </form>
       )}
+    </div>
     </div>
   );
 }
