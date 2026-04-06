@@ -494,10 +494,10 @@ export function ForumPage() {
         )}
 
         {/* Demo post */}
+        <div ref={demoRef} style={{ opacity: 0, transform: 'translateY(18px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }} className="relative group/card mb-3">
+          <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-[#4B9FFF]/14 to-transparent blur-xl pointer-events-none transition-opacity duration-500 opacity-0 group-hover/card:opacity-100" />
         <div
-          ref={demoRef}
-          style={{ opacity: 0, transform: 'translateY(18px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }}
-          className="bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] overflow-hidden mb-3"
+          className="relative bg-white/85 backdrop-blur-sm rounded-2xl border border-black/5 shadow-[0_2px_12px_rgba(0,0,0,0.05)] overflow-hidden"
         >
           <div className="px-5 pt-5 pb-0">
             <div className="flex items-center gap-2 mb-3">
@@ -553,6 +553,7 @@ export function ForumPage() {
               )}
             </form>
           )}
+        </div>
         </div>
 
         {/* Real posts */}
