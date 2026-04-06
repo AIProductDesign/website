@@ -42,7 +42,15 @@
       "Bash(python:*)",
       "Bash(pip install:*)",
       "Bash(C:/Users/antvervoort/restyle_pptx.py:*)",
-      "Bash(find /c/Users/antvervoort/OneDrive* -type d -o -type f)"
+      "Bash(find /c/Users/antvervoort/OneDrive* -type d -o -type f)",
+      "Bash(start http://localhost:3000)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :3000)",
+      "Bash(tasklist /fi \"PID eq 32664\")",
+      "Bash(tasklist /fi \"PID eq 30780\")",
+      "Bash(tasklist)",
+      "Bash(wmic process:*)",
+      "Bash(powershell:*)"
     ]
   }
 }

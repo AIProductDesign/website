@@ -388,9 +388,14 @@ export function ForumPage() {
       {/* Nav */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-black/6">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <a href="/" className="tracking-widest font-bold text-[#1D1D1F]" style={{ fontSize: '1.05rem', fontFamily: "'Dyson Sans Modern', sans-serif" }}>
-            aipec
-          </a>
+          <div className="flex items-center gap-4">
+            <a href="/" className="tracking-widest font-bold text-[#1D1D1F]" style={{ fontSize: '1.05rem', fontFamily: "'Dyson Sans Modern', sans-serif" }}>
+              aipec
+            </a>
+            <a href="/" className="hidden sm:flex items-center gap-1 text-xs text-[#1D1D1F]/35 hover:text-[#1D1D1F] transition">
+              ← Hoofdpagina
+            </a>
+          </div>
           <div className="flex items-center gap-3">
             {profile && (
               <span className="hidden sm:block text-xs font-semibold text-[#4B9FFF]">{profile.company_name}</span>
